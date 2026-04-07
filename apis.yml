@@ -1,6 +1,7 @@
 aid: vlex
 name: vLex
-description: 'Transform your documents and knowledge into new insights and services. '
+description: >-
+  Transform your documents and knowledge into new insights and services.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -9,12 +10,14 @@ tags:
   - API
 created: '2025-03-01'
 modified: '2026-03-16'
-url: https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
   - aid: vlex:vlex
     name: vLex
-    description: 'Transform your documents and knowledge into new insights and services. '
+    description: >-
+      Transform your documents and knowledge into new insights and services.
     humanURL: ' https://vlex.com/products/vlex-apis'
     tags:
       - API
