@@ -1,0 +1,120 @@
+vocabulary:
+  name: vLex Vocabulary
+  description: >-
+    Canonical terms and concepts used in the vLex legal intelligence platform
+    and its Iceberg APIs, covering legal research, AI classification, citation
+    detection, anonymization, and legal document types.
+  version: 1.0.0
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  tags:
+    - AI
+    - Legal Research
+    - Legal Tech
+    - NLP
+
+terms:
+  - term: Iceberg
+    definition: >-
+      vLex's proprietary cloud-based data hub that serves as the foundation
+      of all vLex APIs. Incorporates graph-oriented data representation,
+      IceNet classification, vCite citation detection, and entity recognition.
+    tags:
+      - Platform
+
+  - term: IceNet
+    definition: >-
+      vLex's AI-powered legal classification and search ranking algorithm,
+      designed to benefit from Iceberg's graph-oriented data representation
+      and the past behavior of similar users.
+    tags:
+      - AI
+
+  - term: vCite
+    definition: >-
+      vLex's proprietary citation detection algorithm that identifies and
+      parses legal citations in text across 20+ jurisdictions. Maps citations
+      to documents in the vLex corpus.
+    tags:
+      - Citation
+
+  - term: Case Law
+    altTerms:
+      - case_law
+    definition: >-
+      Legal decisions issued by courts. Includes judgments, opinions, and
+      orders from federal, state, and international courts. One of the
+      primary document types in the vLex corpus.
+    tags:
+      - Document Type
+
+  - term: Anonymization
+    definition: >-
+      The process of identifying and replacing personally identifiable
+      information (PII) in legal text. vLex's Anonymization API is trained
+      on legal data to recognize names, organizations, and entities in
+      court documents and contracts.
+    tags:
+      - Privacy
+
+  - term: Named Entity Recognition
+    altTerms:
+      - NER
+      - entity extraction
+    definition: >-
+      An NLP task that identifies and classifies named entities in text,
+      such as persons, organizations, locations, and dates. Used by the
+      vLex Anonymization API for PII detection.
+    tags:
+      - NLP
+
+  - term: Practice Area
+    definition: >-
+      A specialization within the legal profession, such as Employment Law,
+      Contract Law, Intellectual Property, or Criminal Law. The vLex
+      Classification API assigns practice area labels to legal text.
+    tags:
+      - Classification
+
+  - term: Jurisdiction
+    definition: >-
+      The legal authority of a court or government body, typically defined
+      by geographic boundaries. Used in vLex search and citation APIs to
+      filter results by country or region (ISO 3166-1 codes).
+    tags:
+      - Legal
+
+  - term: Key Phrase
+    definition: >-
+      A significant legal term, term of art, or important concept extracted
+      from a legal text. The vLex Key Phrase Extraction API returns ranked
+      phrases that best represent the document's legal substance.
+    tags:
+      - NLP
+
+  - term: Subscription Key
+    altTerms:
+      - Ocp-Apim-Subscription-Key
+    definition: >-
+      The API authentication header required for all vLex Iceberg API calls.
+      Obtained by signing up at the vLex Developer Portal (developer.vlex.com).
+    tags:
+      - Authentication
+
+  - term: Fastcase
+    definition: >-
+      A legal research platform acquired by vLex in 2023. The Fastcase Legal
+      Data API provides raw legal data feeds in JSON, XML, and LDML formats.
+      Now integrated into the vLex platform.
+    tags:
+      - Product
+
+  - term: Remote Authentication
+    altTerms:
+      - remote_auth
+    definition: >-
+      vLex's single sign-on mechanism for institutional access. Generates
+      a redirect URL using an HMAC hash of the user's credentials and a
+      shared account token, enabling seamless SSO to vlex.com.
+    tags:
+      - Authentication

@@ -1,0 +1,256 @@
+openapi: 3.1.0
+info:
+  title: vLex Iceberg Anonymization API
+  description: >-
+    The vLex Iceberg Anonymization API identifies and anonymizes names and
+    personally identifiable information from any text input. Pre-trained on
+    legal data to recognize personal names, organizations, and sensitive
+    entities within legal documents, contracts, and court filings for
+    privacy protection and data compliance workflows.
+  version: 1.0.0
+  contact:
+    name: vLex Developer Support
+    url: https://developer.vlex.com/
+  license:
+    name: Proprietary
+    url: https://vlex.com/
+externalDocs:
+  description: vLex Developer Portal
+  url: https://developer.vlex.com/apis
+servers:
+  - url: https://api.vlex.com
+    description: vLex Iceberg API
+tags:
+  - name: Anonymization
+    description: Identify and anonymize personally identifiable information in text
+paths:
+  /v1/anonymize:
+    post:
+      operationId: anonymizeText
+      summary: Anonymize Text
+      description: >-
+        Accepts a text input and identifies all personally identifiable
+        information (names, organizations, and other sensitive entities).
+        Returns the original text with identified entities replaced or
+        tagged for anonymization. Pre-trained on legal data to handle
+        case law, contracts, and regulatory documents.
+      tags:
+        - Anonymization
+      security:
+        - SubscriptionKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnonymizeRequest'
+            examples:
+              legalText:
+                summary: Anonymize a legal document excerpt
+                value:
+                  text: "In the case of John Smith v. ABC Corporation, filed on March 15, 2026 in the District Court of New York, the plaintiff John Smith alleges that..."
+                  mode: replace
+                  replacement_token: "[PERSON]"
+      responses:
+        '200':
+          description: Anonymized text with identified entities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnonymizeResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /v1/anonymize/entities:
+    post:
+      operationId: extractEntities
+      summary: Extract Named Entities
+      description: >-
+        Extract named entities from text without replacing them. Returns a
+        list of identified entities with their positions, types, and
+        confidence scores. Useful for entity analysis and document review.
+      tags:
+        - Anonymization
+      security:
+        - SubscriptionKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtractEntitiesRequest'
+      responses:
+        '200':
+          description: List of identified entities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtractEntitiesResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    SubscriptionKey:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: vLex API subscription key obtained from the developer portal.
+  schemas:
+    AnonymizeRequest:
+      type: object
+      required:
+        - text
+      description: Request body for text anonymization.
+      properties:
+        text:
+          type: string
+          description: The input text to anonymize. Can be a legal document, contract, or any text containing personal data.
+          minLength: 1
+          maxLength: 50000
+        mode:
+          type: string
+          description: Anonymization mode.
+          enum:
+            - replace
+            - tag
+            - redact
+          default: replace
+        replacement_token:
+          type: string
+          description: >-
+            Token to use when replacing identified entities (for mode=replace).
+            Use entity-type-specific tokens like [PERSON], [ORG] or a generic [REDACTED].
+          default: "[REDACTED]"
+        entity_types:
+          type: array
+          items:
+            type: string
+            enum:
+              - PERSON
+              - ORGANIZATION
+              - LOCATION
+              - DATE
+              - EMAIL
+              - PHONE
+              - ID_NUMBER
+          description: Entity types to detect. Defaults to all types if not specified.
+        language:
+          type: string
+          description: BCP-47 language tag of the input text.
+          default: en
+          example: en
+    AnonymizeResponse:
+      type: object
+      description: Anonymized text with entity metadata.
+      properties:
+        anonymized_text:
+          type: string
+          description: The input text with detected entities replaced or tagged.
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+          description: List of all detected entities.
+        entity_count:
+          type: integer
+          description: Total number of entities detected.
+        processing_time_ms:
+          type: integer
+          description: Processing time in milliseconds.
+    ExtractEntitiesRequest:
+      type: object
+      required:
+        - text
+      description: Request body for entity extraction.
+      properties:
+        text:
+          type: string
+          description: Input text to analyze.
+          minLength: 1
+          maxLength: 50000
+        entity_types:
+          type: array
+          items:
+            type: string
+          description: Entity types to extract.
+        language:
+          type: string
+          default: en
+    ExtractEntitiesResponse:
+      type: object
+      description: Extracted entities from the input text.
+      properties:
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+        entity_count:
+          type: integer
+        processing_time_ms:
+          type: integer
+    Entity:
+      type: object
+      description: A named entity identified in the input text.
+      properties:
+        text:
+          type: string
+          description: The original entity text as it appears in the document.
+          example: "John Smith"
+        entity_type:
+          type: string
+          description: The type of entity detected.
+          enum:
+            - PERSON
+            - ORGANIZATION
+            - LOCATION
+            - DATE
+            - EMAIL
+            - PHONE
+            - ID_NUMBER
+          example: PERSON
+        confidence:
+          type: number
+          format: float
+          description: Confidence score between 0 and 1.
+          minimum: 0
+          maximum: 1
+          example: 0.97
+        start_offset:
+          type: integer
+          description: Character offset where the entity begins in the input text.
+        end_offset:
+          type: integer
+          description: Character offset where the entity ends.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        code:
+          type: integer
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing subscription key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

@@ -1,0 +1,17 @@
+{
+  "name": "vLexLegalDocument",
+  "description": "Legal document with full text, metadata, and citations",
+  "type": "object",
+  "fields": [
+    {"name": "id", "type": "string", "required": true, "description": "vLex document ID"},
+    {"name": "title", "type": "string", "required": true, "description": "Document title"},
+    {"name": "document_type", "type": "string (enum)", "required": true, "description": "case_law|statute|regulation|secondary_source|contract"},
+    {"name": "jurisdiction", "type": "string", "required": false, "description": "ISO jurisdiction code"},
+    {"name": "date", "type": "string (date)", "required": false, "description": "Publication/decision date"},
+    {"name": "language", "type": "string", "required": false, "description": "BCP-47 language code"},
+    {"name": "full_text", "type": "string", "required": false, "description": "Full document text"},
+    {"name": "metadata", "type": "object", "required": false, "description": "Court, parties, docket, etc."},
+    {"name": "citations", "type": "array<Citation>", "required": false, "description": "Legal citations"},
+    {"name": "url", "type": "string (URI)", "required": false, "description": "Link on vlex.com"}
+  ]
+}

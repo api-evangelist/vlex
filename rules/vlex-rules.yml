@@ -1,0 +1,85 @@
+extends:
+  - spectral:oas
+
+rules:
+  vlex-operation-ids-camel-case:
+    description: Operation IDs must use camelCase to match vLex SDK conventions.
+    message: "{{property}} must be camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  vlex-require-subscription-key-security:
+    description: All vLex Iceberg API operations require a subscription key.
+    message: "Operation {{path}} must define security"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: security
+      function: truthy
+
+  vlex-require-summaries:
+    description: All operations must have a summary.
+    message: "Operation {{path}} must have a summary"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+
+  vlex-require-descriptions:
+    description: All operations and schemas must have descriptions.
+    message: "{{path}} must have a description"
+    severity: warn
+    given:
+      - "$.paths[*][*]"
+      - "$.components.schemas[*]"
+    then:
+      field: description
+      function: truthy
+
+  vlex-post-operations-have-request-body:
+    description: All POST operations must define a requestBody.
+    message: "POST operation {{path}} must define a requestBody"
+    severity: error
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: truthy
+
+  vlex-require-401-response:
+    description: All authenticated operations must define a 401 Unauthorized response.
+    message: "Operation {{path}} must define a 401 response"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: responses.401
+      function: truthy
+
+  vlex-confidence-fields-use-float:
+    description: Confidence scores must use type number with format float.
+    message: "Confidence field {{path}} must be type:number, format:float"
+    severity: warn
+    given: "$.components.schemas[*].properties[?(@.description && @.description =~ /confidence/i)]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            type:
+              const: number
+            format:
+              const: float
+
+  vlex-v1-api-prefix:
+    description: All vLex Iceberg API paths must be prefixed with /v1/.
+    message: "Path {{path}} must start with /v1/"
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/v1/"

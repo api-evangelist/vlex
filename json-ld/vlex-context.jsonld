@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "vlex": "https://vlex.com/vocabulary#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+
+    "LegalDocument": "vlex:LegalDocument",
+    "CaseLaw": "vlex:CaseLaw",
+    "Statute": "vlex:Statute",
+    "Regulation": "vlex:Regulation",
+    "Citation": "vlex:Citation",
+    "Entity": "vlex:Entity",
+    "Classification": "vlex:Classification",
+    "KeyPhrase": "vlex:KeyPhrase",
+
+    "id": {"@id": "@id"},
+    "title": {"@id": "dct:title"},
+    "document_type": {"@id": "vlex:documentType", "@type": "xsd:string"},
+    "jurisdiction": {"@id": "vlex:jurisdiction", "@type": "xsd:string"},
+    "language": {"@id": "dct:language"},
+    "full_text": {"@id": "vlex:fullText", "@type": "xsd:string"},
+    "date": {"@id": "dct:date", "@type": "xsd:date"},
+
+    "raw_text": {"@id": "vlex:rawText", "@type": "xsd:string"},
+    "citation_type": {"@id": "vlex:citationType", "@type": "xsd:string"},
+    "year": {"@id": "vlex:year", "@type": "xsd:integer"},
+
+    "entity_type": {"@id": "vlex:entityType", "@type": "xsd:string"},
+    "confidence": {"@id": "vlex:confidence", "@type": "xsd:float"},
+    "start_offset": {"@id": "vlex:startOffset", "@type": "xsd:integer"},
+    "end_offset": {"@id": "vlex:endOffset", "@type": "xsd:integer"},
+
+    "practice_areas": {"@id": "vlex:practiceAreas", "@container": "@list"},
+    "key_phrases": {"@id": "vlex:keyPhrases", "@container": "@list"},
+    "citations": {"@id": "vlex:citations", "@container": "@list"},
+
+    "phrase": {"@id": "vlex:phrase", "@type": "xsd:string"},
+    "score": {"@id": "vlex:score", "@type": "xsd:float"},
+    "label": {"@id": "vlex:label", "@type": "xsd:string"},
+
+    "name": {"@id": "schema:name"},
+    "description": {"@id": "schema:description"},
+    "url": {"@id": "schema:url", "@type": "@id"},
+
+    "LegalCase": "schema:LegalCase",
+    "Legislation": "schema:Legislation",
+    "GovernmentPermit": "schema:GovernmentPermit"
+  }
+}

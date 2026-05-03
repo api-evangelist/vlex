@@ -1,0 +1,230 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "vLex Iceberg Legal Research API"
+  description: >-
+    Shared definition for the vLex Iceberg Legal Research API. Provides
+    semantic search, document retrieval, classification, key phrase extraction,
+    and citation detection across vLex's 100+ million legal document corpus.
+  tags:
+    - vLex
+    - AI
+    - Case Law
+    - Citation Detection
+    - Classification
+    - Legal Research
+    - Legal Tech
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      VLEX_API_KEY: VLEX_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: vlex-research
+      baseUri: https://api.vlex.com
+      description: "vLex Iceberg legal research API."
+      authentication:
+        type: apikey
+        key: Ocp-Apim-Subscription-Key
+        value: "{{VLEX_API_KEY}}"
+        placement: header
+      resources:
+        - name: search
+          path: /v1/search
+          description: "Legal document search."
+          operations:
+            - name: search-documents
+              method: POST
+              description: "Search the vLex corpus for legal documents."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  query: "{{tools.query}}"
+                  jurisdiction: "{{tools.jurisdiction}}"
+                  document_type: "{{tools.document_type}}"
+
+        - name: document
+          path: /v1/documents/{document_id}
+          description: "Individual legal document retrieval."
+          operations:
+            - name: get-document
+              method: GET
+              description: "Get a full legal document by vLex ID."
+              inputParameters:
+                - name: document_id
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: classify
+          path: /v1/classify
+          description: "Legal document classification."
+          operations:
+            - name: classify-document
+              method: POST
+              description: "Classify a legal text into practice areas."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  text: "{{tools.text}}"
+
+        - name: key-phrases
+          path: /v1/key-phrases
+          description: "Legal key phrase extraction."
+          operations:
+            - name: extract-key-phrases
+              method: POST
+              description: "Extract key legal phrases from text."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  text: "{{tools.text}}"
+
+        - name: citations
+          path: /v1/citations
+          description: "Legal citation detection."
+          operations:
+            - name: detect-citations
+              method: POST
+              description: "Detect and parse legal citations using vCite."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  text: "{{tools.text}}"
+                  jurisdiction: "{{tools.jurisdiction}}"
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: vlex-research-rest
+      resources:
+        - path: /v1/search
+          name: search
+          operations:
+            - method: POST
+              name: search-documents
+              call: "vlex-research.search-documents"
+              with:
+                query: "rest.query"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/documents/{document_id}
+          name: document
+          operations:
+            - method: GET
+              name: get-document
+              call: "vlex-research.get-document"
+              with:
+                document_id: "rest.document_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/citations
+          name: citations
+          operations:
+            - method: POST
+              name: detect-citations
+              call: "vlex-research.detect-citations"
+              with:
+                text: "rest.text"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: vlex-research-mcp
+      transport: http
+      tools:
+        - name: search-legal-documents
+          description: "Search the vLex corpus of 100M+ legal documents."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.search-documents"
+          with:
+            query: "tools.query"
+            jurisdiction: "tools.jurisdiction"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-legal-document
+          description: "Retrieve a full legal document by its vLex ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.get-document"
+          with:
+            document_id: "tools.document_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: classify-legal-text
+          description: "Classify a legal text into practice areas using IceNet."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.classify-document"
+          with:
+            text: "tools.text"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: extract-legal-key-phrases
+          description: "Extract key legal phrases and terms from a text."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.extract-key-phrases"
+          with:
+            text: "tools.text"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: detect-legal-citations
+          description: "Detect and parse legal citations in text using vCite (20+ jurisdictions)."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.detect-citations"
+          with:
+            text: "tools.text"
+            jurisdiction: "tools.jurisdiction"
+          outputParameters:
+            - type: object
+              mapping: "$."

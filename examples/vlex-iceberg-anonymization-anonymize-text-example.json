@@ -1,0 +1,57 @@
+{
+  "title": "Anonymize Legal Text",
+  "description": "Replace identified persons and organizations in a case law excerpt with [PERSON] tokens.",
+  "operation": "anonymizeText",
+  "request": {
+    "method": "POST",
+    "url": "https://api.vlex.com/v1/anonymize",
+    "headers": {
+      "Ocp-Apim-Subscription-Key": "your-vlex-subscription-key",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "text": "In the case of John Smith v. ABC Corporation, filed on March 15, 2026 in the District Court of New York, the plaintiff John Smith alleges that his supervisor Jane Doe subjected him to a hostile work environment.",
+      "mode": "replace",
+      "replacement_token": "[PERSON]",
+      "entity_types": ["PERSON", "ORGANIZATION"]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "anonymized_text": "In the case of [PERSON] v. [ORGANIZATION], filed on March 15, 2026 in the District Court of New York, the plaintiff [PERSON] alleges that his supervisor [PERSON] subjected him to a hostile work environment.",
+      "entities": [
+        {
+          "text": "John Smith",
+          "entity_type": "PERSON",
+          "confidence": 0.98,
+          "start_offset": 21,
+          "end_offset": 31
+        },
+        {
+          "text": "ABC Corporation",
+          "entity_type": "ORGANIZATION",
+          "confidence": 0.96,
+          "start_offset": 35,
+          "end_offset": 50
+        },
+        {
+          "text": "John Smith",
+          "entity_type": "PERSON",
+          "confidence": 0.98,
+          "start_offset": 107,
+          "end_offset": 117
+        },
+        {
+          "text": "Jane Doe",
+          "entity_type": "PERSON",
+          "confidence": 0.97,
+          "start_offset": 141,
+          "end_offset": 149
+        }
+      ],
+      "entity_count": 4,
+      "processing_time_ms": 45
+    }
+  }
+}

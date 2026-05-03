@@ -1,0 +1,241 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "vLex Legal AI Workflow"
+  description: >-
+    Workflow capability for legal professionals and legaltech developers using
+    vLex AI APIs. Combines legal document search, classification, key phrase
+    extraction, citation detection, and text anonymization into a unified
+    interface for document review, legal research, and privacy compliance
+    workflows. Targeted at lawyers, paralegals, compliance teams, and
+    legaltech application developers.
+  tags:
+    - vLex
+    - AI
+    - Anonymization
+    - Case Law
+    - Citation Detection
+    - Classification
+    - Compliance
+    - Legal Research
+    - Legal Tech
+    - NLP
+    - Privacy
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      VLEX_API_KEY: VLEX_API_KEY
+
+capability:
+  consumes:
+    - import: vlex-anonymization
+      location: ./shared/iceberg-anonymization.yaml
+    - import: vlex-research
+      location: ./shared/iceberg-legal-research.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: vlex-legal-api
+      description: "Unified REST API for vLex legal AI workflows."
+      resources:
+        - path: /v1/search
+          name: search
+          description: "Search the vLex legal corpus."
+          operations:
+            - method: POST
+              name: search-documents
+              description: "Semantic search across 100M+ legal documents."
+              call: "vlex-research.search-documents"
+              with:
+                query: "rest.query"
+                jurisdiction: "rest.jurisdiction"
+                document_type: "rest.document_type"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/documents/{document_id}
+          name: document
+          description: "Legal document retrieval."
+          operations:
+            - method: GET
+              name: get-document
+              description: "Get a full legal document by vLex ID."
+              call: "vlex-research.get-document"
+              with:
+                document_id: "rest.document_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/classify
+          name: classify
+          description: "Legal text classification."
+          operations:
+            - method: POST
+              name: classify-document
+              description: "Classify legal text into practice areas."
+              call: "vlex-research.classify-document"
+              with:
+                text: "rest.text"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/key-phrases
+          name: key-phrases
+          description: "Key phrase extraction."
+          operations:
+            - method: POST
+              name: extract-key-phrases
+              description: "Extract key legal phrases from text."
+              call: "vlex-research.extract-key-phrases"
+              with:
+                text: "rest.text"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/citations
+          name: citations
+          description: "Legal citation detection."
+          operations:
+            - method: POST
+              name: detect-citations
+              description: "Detect legal citations using vCite."
+              call: "vlex-research.detect-citations"
+              with:
+                text: "rest.text"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/anonymize
+          name: anonymize
+          description: "Text anonymization."
+          operations:
+            - method: POST
+              name: anonymize-text
+              description: "Anonymize PII in legal text."
+              call: "vlex-anonymization.anonymize-text"
+              with:
+                text: "rest.text"
+                mode: "rest.mode"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/anonymize/entities
+          name: entities
+          description: "Named entity extraction."
+          operations:
+            - method: POST
+              name: extract-entities
+              description: "Extract named entities without modifying text."
+              call: "vlex-anonymization.extract-entities"
+              with:
+                text: "rest.text"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: vlex-legal-mcp
+      transport: http
+      description: "MCP server for AI-assisted legal research, document review, and privacy compliance."
+      tools:
+        - name: search-legal-documents
+          description: "Search the vLex corpus of 100+ million legal documents across global jurisdictions. Supports natural language queries. Filter by jurisdiction (e.g. US, GB), document type (case_law, statute), and date range."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.search-documents"
+          with:
+            query: "tools.query"
+            jurisdiction: "tools.jurisdiction"
+            document_type: "tools.document_type"
+            date_from: "tools.date_from"
+            date_to: "tools.date_to"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-legal-document
+          description: "Retrieve the full text and metadata of a legal document by its vLex ID."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.get-document"
+          with:
+            document_id: "tools.document_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: classify-legal-text
+          description: "Classify a legal text into practice areas (e.g. Employment Law, Contract Law, IP) using vLex's IceNet algorithm. Returns confidence-ranked classifications."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.classify-document"
+          with:
+            text: "tools.text"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: extract-legal-key-phrases
+          description: "Extract key legal phrases, terms of art, and important concepts from a legal document."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.extract-key-phrases"
+          with:
+            text: "tools.text"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: detect-legal-citations
+          description: "Detect and parse legal citations in text using vCite. Supports citation formats from 20+ jurisdictions. Returns structured citation data with links to referenced documents."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-research.detect-citations"
+          with:
+            text: "tools.text"
+            jurisdiction: "tools.jurisdiction"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: anonymize-legal-document
+          description: "Anonymize personally identifiable information (PII) in a legal document. Replaces names, organizations, and other sensitive entities with tokens. Pre-trained on legal corpora for high accuracy."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "vlex-anonymization.anonymize-text"
+          with:
+            text: "tools.text"
+            mode: "tools.mode"
+            replacement_token: "tools.replacement_token"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: extract-document-entities
+          description: "Identify all named entities (persons, organizations, locations, dates) in a legal text without modifying it. Useful for document review and entity mapping."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-anonymization.extract-entities"
+          with:
+            text: "tools.text"
+          outputParameters:
+            - type: object
+              mapping: "$."

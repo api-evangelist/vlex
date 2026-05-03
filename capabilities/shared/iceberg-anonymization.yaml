@@ -1,0 +1,129 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "vLex Iceberg Anonymization API"
+  description: >-
+    Shared definition for the vLex Iceberg Anonymization API. Detects and
+    anonymizes personal names, organizations, and other PII in legal text.
+    Pre-trained on legal corpora for high accuracy on court documents,
+    contracts, and regulatory filings.
+  tags:
+    - vLex
+    - Anonymization
+    - NLP
+    - Privacy
+    - Legal Tech
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      VLEX_API_KEY: VLEX_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: vlex-anonymization
+      baseUri: https://api.vlex.com
+      description: "vLex Iceberg text anonymization API."
+      authentication:
+        type: apikey
+        key: Ocp-Apim-Subscription-Key
+        value: "{{VLEX_API_KEY}}"
+        placement: header
+      resources:
+        - name: anonymize
+          path: /v1/anonymize
+          description: "Anonymize PII in legal text."
+          operations:
+            - name: anonymize-text
+              method: POST
+              description: "Replace identified PII entities with tokens in the input text."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  text: "{{tools.text}}"
+                  mode: "{{tools.mode}}"
+                  replacement_token: "{{tools.replacement_token}}"
+
+        - name: entities
+          path: /v1/anonymize/entities
+          description: "Extract named entities without replacing them."
+          operations:
+            - name: extract-entities
+              method: POST
+              description: "Identify and return all named entities in the input text."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  text: "{{tools.text}}"
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: vlex-anonymization-rest
+      resources:
+        - path: /v1/anonymize
+          name: anonymize
+          operations:
+            - method: POST
+              name: anonymize-text
+              call: "vlex-anonymization.anonymize-text"
+              with:
+                text: "rest.text"
+                mode: "rest.mode"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/anonymize/entities
+          name: entities
+          operations:
+            - method: POST
+              name: extract-entities
+              call: "vlex-anonymization.extract-entities"
+              with:
+                text: "rest.text"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: vlex-anonymization-mcp
+      transport: http
+      tools:
+        - name: anonymize-legal-text
+          description: "Anonymize PII in a legal document. Replaces identified names, organizations, and sensitive entities with tokens."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "vlex-anonymization.anonymize-text"
+          with:
+            text: "tools.text"
+            mode: "tools.mode"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: extract-pii-entities
+          description: "Identify and extract all named entities (persons, organizations, locations) from a legal text without modifying it."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vlex-anonymization.extract-entities"
+          with:
+            text: "tools.text"
+          outputParameters:
+            - type: object
+              mapping: "$."
