@@ -97,6 +97,22 @@ common:
     type: Product
   - url: https://support.vlex.com/
     type: Support
+integrations:
+  - name: vLex
+  - name: vLex Custom AI Solutions
+  - name: BakerHostetler
+  - name: Ferrari
+  - name: Stradley Ronon
+  - name: Fisher Phillips
+  - name: Grammarly
+  - name: University of Oxford
+  - name: ABA
+  - name: The Florida Bar (Member Benefit)
+  - name: Ryanair
+  - name: Cuatrecasas
+  - name: vLex (part of Clio)
+  - name: LinkedIn
+  - name: Facebook
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
