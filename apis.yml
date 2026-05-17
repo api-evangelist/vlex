@@ -76,7 +76,7 @@ apis:
       - Single Sign-On
       - SSO
     properties:
-      - type: GitHub Repository
+      - type: GitHubRepository
         url: https://github.com/vlex/remote_auth
 common:
   - url: https://vlex.com/
@@ -92,7 +92,7 @@ common:
   - url: https://vlex.com/integrations
     type: Integrations
   - url: https://github.com/vlex
-    type: GitHub Organization
+    type: GitHubOrganization
   - url: https://vlex.com/products/fastcase
     type: Product
   - url: https://support.vlex.com/
