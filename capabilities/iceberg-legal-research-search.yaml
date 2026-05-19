@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: vLex Iceberg Legal Research API — Search
+  description: 'vLex Iceberg Legal Research API — Search. 1 operations. Lead operation: Search Legal Documents. Self-contained
+    Naftiko capability covering one Vlex business surface.'
+  tags:
+  - Vlex
+  - Search
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VLEX_API_KEY: VLEX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: iceberg-legal-research-search
+    baseUri: https://api.vlex.com
+    description: vLex Iceberg Legal Research API — Search business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-search
+      path: /v1/search
+      operations:
+      - name: searchdocuments
+        method: POST
+        description: Search Legal Documents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Ocp-Apim-Subscription-Key
+      value: '{{env.VLEX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: iceberg-legal-research-search-rest
+    port: 8080
+    description: REST adapter for vLex Iceberg Legal Research API — Search. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/search
+      name: v1-search
+      description: REST surface for v1-search.
+      operations:
+      - method: POST
+        name: searchdocuments
+        description: Search Legal Documents
+        call: iceberg-legal-research-search.searchdocuments
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: iceberg-legal-research-search-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for vLex Iceberg Legal Research API — Search. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: search-legal-documents
+      description: Search Legal Documents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: iceberg-legal-research-search.searchdocuments
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
