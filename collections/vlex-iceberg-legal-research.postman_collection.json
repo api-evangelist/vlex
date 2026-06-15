@@ -1,0 +1,1065 @@
+{
+  "item": [
+    {
+      "id": "f3dbe6a1-5dcc-4b52-9990-0b5576b1bde6",
+      "name": "Search",
+      "description": {
+        "content": "Search the vLex legal document corpus",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6756144c-039e-483b-94a3-05623f6819e2",
+          "name": "Search Legal Documents",
+          "request": {
+            "name": "Search Legal Documents",
+            "description": {
+              "content": "Perform a semantic search across the vLex corpus of 100+ million legal documents. Supports natural language queries with jurisdiction, document type, and date filters. Returns ranked results with document metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"jurisdiction\": \"<string>\",\n  \"document_type\": \"all\",\n  \"date_from\": \"<date>\",\n  \"date_to\": \"<date>\",\n  \"language\": \"<string>\",\n  \"page\": 1,\n  \"per_page\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5dd7e572-b8cd-482e-a800-1c891c318336",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"employment discrimination hostile work environment\",\n  \"jurisdiction\": \"US\",\n  \"document_type\": \"case_law\",\n  \"date_from\": \"2020-01-01\",\n  \"page\": 1,\n  \"per_page\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"document_id\": \"string\",\n      \"title\": \"string\",\n      \"snippet\": \"string\",\n      \"document_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"date\": \"2002-04-06\",\n      \"relevance_score\": 8411.03518219928,\n      \"url\": \"http://QjRGkmFKQuOJ.oqwav-J30V59OjCHhlSxKVLBNf-RnfoXJYqQCPi\"\n    },\n    {\n      \"document_id\": \"string\",\n      \"title\": \"string\",\n      \"snippet\": \"string\",\n      \"document_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"date\": \"1980-09-29\",\n      \"relevance_score\": 6079.665436222787,\n      \"url\": \"http://AdhYgOzUBANkjbW.onuiHjZWkYuErJaTyeIZQyf\"\n    }\n  ],\n  \"total\": 9926,\n  \"page\": 3632,\n  \"per_page\": 4081,\n  \"query_time_ms\": 711\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e05575ea-8a32-4a50-badd-eb0dd445b2fd",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"employment discrimination hostile work environment\",\n  \"jurisdiction\": \"US\",\n  \"document_type\": \"case_law\",\n  \"date_from\": \"2020-01-01\",\n  \"page\": 1,\n  \"per_page\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f9294b1-8f12-40c2-ad4b-1ec2ba09c55a",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"employment discrimination hostile work environment\",\n  \"jurisdiction\": \"US\",\n  \"document_type\": \"case_law\",\n  \"date_from\": \"2020-01-01\",\n  \"page\": 1,\n  \"per_page\": 10\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "32e9b9fb-8fdf-45f7-a644-a012054a09a6",
+      "name": "Documents",
+      "description": {
+        "content": "Retrieve individual legal documents",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8db87135-0111-41f9-afa8-4a1d5301e3fd",
+          "name": "Get Legal Document",
+          "request": {
+            "name": "Get Legal Document",
+            "description": {
+              "content": "Retrieve a specific legal document by its vLex ID, including full text, metadata, and citation data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "documents",
+                ":document_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "document_id",
+                  "description": "(Required) vLex document identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7c720ae0-ef2a-4776-ada5-a49396c73e26",
+              "name": "Legal document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) vLex document identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"document_type\": \"string\",\n  \"jurisdiction\": \"string\",\n  \"date\": \"2013-03-02\",\n  \"language\": \"string\",\n  \"full_text\": \"string\",\n  \"metadata\": {\n    \"key_0\": true,\n    \"key_1\": false,\n    \"key_2\": false,\n    \"key_3\": true,\n    \"key_4\": false\n  },\n  \"citations\": [\n    {\n      \"raw_text\": \"347 U.S. 483 (1954)\",\n      \"document_id\": \"string\",\n      \"citation_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"year\": 8322,\n      \"start_offset\": 7008,\n      \"end_offset\": 3123,\n      \"url\": \"http://DwrJGmsjGRi.oerdZ\"\n    },\n    {\n      \"raw_text\": \"347 U.S. 483 (1954)\",\n      \"document_id\": \"string\",\n      \"citation_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"year\": 6068,\n      \"start_offset\": 9100,\n      \"end_offset\": 7855,\n      \"url\": \"http://KwQixyRcuGefOuJp.gcxU37-i6hoSLaZ20UEfkPRVaQ+2a9l7NBX8Ns02IezYKNFIJD,QMZ0bjYe\"\n    }\n  ],\n  \"url\": \"http://rJVEB.buxdO2pYxMM-qKkIq+MVCDlIL9CHobyRuSSs-oapvaK.weI\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63846fe6-e13c-4ded-8419-4a29aeeebc1c",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) vLex document identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19b2eb65-798b-4420-8405-15d9cbfb538c",
+              "name": "Document not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) vLex document identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "80b20776-55cf-4d7f-985f-9c7d0094dfb6",
+      "name": "Classification",
+      "description": {
+        "content": "Classify legal documents and extract key phrases",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4ae466ce-0e01-4521-99a8-4e2d73b3d980",
+          "name": "Classify Legal Document",
+          "request": {
+            "name": "Classify Legal Document",
+            "description": {
+              "content": "Classify a legal text into practice areas, document types, and extract key legal phrases. Uses IceNet, vLex's legal classification algorithm trained on millions of legal documents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "classify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"language\": \"en\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "45bf3244-d74e-4d40-8b21-9c855359515c",
+              "name": "Classification results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"practice_areas\": [\n    {\n      \"label\": \"string\",\n      \"confidence\": 0.28290498202829106\n    },\n    {\n      \"label\": \"string\",\n      \"confidence\": 0.6596685512447996\n    }\n  ],\n  \"document_type\": {\n    \"label\": \"string\",\n    \"confidence\": 0.2275731780411927\n  },\n  \"key_concepts\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c86f042-8d17-48ed-b69b-360d85682cd7",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bbbcaa1-f499-4476-9ec7-358c70f6430e",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "classify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d27ee6d3-1298-420a-b7b8-22781a70a09a",
+          "name": "Extract Key Phrases",
+          "request": {
+            "name": "Extract Key Phrases",
+            "description": {
+              "content": "Extract significant legal key phrases, terms of art, and important concepts from a legal text. Returns ranked phrases with context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "key-phrases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"max_phrases\": 20,\n  \"language\": \"en\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dd055d78-dc60-4acc-b64a-3540690d5aa5",
+              "name": "Key phrases",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "key-phrases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"max_phrases\": 20,\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_phrases\": [\n    {\n      \"phrase\": \"string\",\n      \"score\": 4913.9667677317575,\n      \"occurrences\": 1118\n    },\n    {\n      \"phrase\": \"string\",\n      \"score\": 7827.356719337603,\n      \"occurrences\": 128\n    }\n  ],\n  \"processing_time_ms\": 3192\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "890de172-60ca-4deb-ab43-0561c9a3eb80",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "key-phrases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"max_phrases\": 20,\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "42898d1e-978b-4456-84bf-398153155dce",
+      "name": "Citations",
+      "description": {
+        "content": "Detect and resolve legal citations (vCite)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04473cdd-81c6-4245-ac00-0a45d1a87781",
+          "name": "Detect Legal Citations",
+          "request": {
+            "name": "Detect Legal Citations",
+            "description": {
+              "content": "Detect and parse legal citations from text using vLex's vCite algorithm. Supports citation formats from 20+ jurisdictions. Returns structured citation data with links to referenced documents where available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "citations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"jurisdiction\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e3461e1-952f-4998-a8e8-8f0480734b10",
+              "name": "Detected citations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "citations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"citations\": [\n    {\n      \"raw_text\": \"347 U.S. 483 (1954)\",\n      \"document_id\": \"string\",\n      \"citation_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"year\": 2792,\n      \"start_offset\": 6086,\n      \"end_offset\": 3236,\n      \"url\": \"https://ItLlwvNfoA.ltD+LWcheneG3wUOlE2-+q5OyWr0SbFdnY6eePjGi\"\n    },\n    {\n      \"raw_text\": \"347 U.S. 483 (1954)\",\n      \"document_id\": \"string\",\n      \"citation_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"year\": 8833,\n      \"start_offset\": 2170,\n      \"end_offset\": 5201,\n      \"url\": \"https://llYWaonqhoxKmQdKa.nlnLnT4TguHH+AFQ7LmIZ9oDr2,M5LgkWNVwpBxTMcG3rK\"\n    }\n  ],\n  \"citation_count\": 2007\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26776db9-4b2d-4954-82c5-4a0d6ad02d89",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "citations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vlex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8731f3da-592f-40e6-86d6-fdf558ee4039",
+    "name": "vLex Iceberg Legal Research API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The vLex Iceberg Legal Research API provides AI-powered access to legal documents, case law, statutes, and regulations from global jurisdictions. Capabilities include semantic document search, AI classification, key phrase extraction, and citation detection (vCite). The corpus spans 100+ million documents from 2,000+ multilingual sources.\n\nContact Support:\n Name: vLex Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,9 +1,10 @@
 aid: vlex
 name: vLex
-description: vLex (part of Clio) is a global legal intelligence platform that applies AI to ingest, enrich, classify, and
-  deliver insights from over 100 million legal documents across 2,000+ multilingual sources. The vLex Iceberg platform provides
-  REST APIs for legal document anonymization, classification, key phrase extraction, citation detection, and AI-powered legal
-  research. vLex also offers the Fastcase Legal Data API for raw legal data feeds.
+description: >-
+  vLex (part of Clio) is a global legal intelligence platform that applies AI to ingest, enrich, classify, and deliver
+  insights from over 100 million legal documents across 2,000+ multilingual sources. The vLex Iceberg platform provides
+  REST APIs for legal document anonymization, classification, key phrase extraction, citation detection, and AI-powered
+  legal research. vLex also offers the Fastcase Legal Data API for raw legal data feeds.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -22,60 +23,56 @@ specificationVersion: '0.19'
 apis:
   - aid: vlex:iceberg-anonymization-api
     name: vLex Iceberg Anonymization API
-    description: Identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on
-      legal data to recognize names, organizations, and sensitive entities within legal documents for privacy protection and
+    description: >-
+      Identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal
+      data to recognize names, organizations, and sensitive entities within legal documents for privacy protection and
       data compliance.
     humanURL: https://developer.vlex.com/apis
     tags:
-    - Anonymization
-    - NLP
-    - Privacy
-    - Legal Tech
+      - Anonymization
+      - NLP
+      - Privacy
+      - Legal Tech
     properties:
-    - type: Documentation
-      url: https://developer.vlex.com/apis
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/openapi/vlex-iceberg-anonymization-openapi.yml
-    - type: NaftikoCapability
-      url: capabilities/iceberg-anonymization-anonymization.yaml
+      - type: Documentation
+        url: https://developer.vlex.com/apis
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/openapi/vlex-iceberg-anonymization-openapi.yml
   - aid: vlex:iceberg-legal-research-api
     name: vLex Iceberg Legal Research API
-    description: AI-powered legal research API providing document search, classification, key phrase extraction, citation detection
-      (vCite), and legal entity identification across vLex's corpus of 100+ million legal documents from global jurisdictions.
+    description: >-
+      AI-powered legal research API providing document search, classification, key phrase extraction, citation detection
+      (vCite), and legal entity identification across vLex's corpus of 100+ million legal documents from global
+      jurisdictions.
     humanURL: https://developer.vlex.com/apis
     tags:
-    - AI
-    - Case Law
-    - Citation Detection
-    - Classification
-    - Legal Research
-    - Legal Tech
-    - Search
+      - AI
+      - Case Law
+      - Citation Detection
+      - Classification
+      - Legal Research
+      - Legal Tech
+      - Search
     properties:
-    - type: Documentation
-      url: https://developer.vlex.com/apis
-    - type: OpenAPI
-      url: https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/openapi/vlex-iceberg-legal-research-openapi.yml
-    - type: NaftikoCapability
-      url: capabilities/iceberg-legal-research-citations.yaml
-    - type: NaftikoCapability
-      url: capabilities/iceberg-legal-research-classification.yaml
-    - type: NaftikoCapability
-      url: capabilities/iceberg-legal-research-documents.yaml
-    - type: NaftikoCapability
-      url: capabilities/iceberg-legal-research-search.yaml
+      - type: Documentation
+        url: https://developer.vlex.com/apis
+      - type: OpenAPI
+        url: >-
+          https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/openapi/vlex-iceberg-legal-research-openapi.yml
   - aid: vlex:remote-auth-api
     name: vLex Remote Authentication API
-    description: Single sign-on authentication API for corporate vLex accounts. Generates redirect URLs using HMAC authentication
+    description: >-
+      Single sign-on authentication API for corporate vLex accounts. Generates redirect URLs using HMAC authentication
       for seamless user access to vLex.com from institutional portals.
     humanURL: https://github.com/vlex/remote_auth
     tags:
-    - Authentication
-    - Single Sign-On
-    - SSO
+      - Authentication
+      - Single Sign-On
+      - SSO
     properties:
-    - type: GitHubRepository
-      url: https://github.com/vlex/remote_auth
+      - type: GitHubRepository
+        url: https://github.com/vlex/remote_auth
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/vlex

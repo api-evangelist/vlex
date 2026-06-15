@@ -1,10 +1,8 @@
-# vLex
+# vLex (vlex)
 
-vLex (part of Clio) is a global legal intelligence platform that applies AI to ingest, enrich, classify, and deliver insights from over 100 million legal documents across 2,000+ multilingual sources. The vLex Iceberg platform provides APIs for legal document search, anonymization, classification, key phrase extraction, and citation detection.
+vLex (part of Clio) is a global legal intelligence platform that applies AI to ingest, enrich, classify, and deliver insights from over 100 million legal documents across 2,000+ multilingual sources. The vLex Iceberg platform provides REST APIs for legal document anonymization, classification, key phrase extraction, citation detection, and AI-powered legal research. vLex also offers the Fastcase Legal Data API for raw legal data feeds.
 
-**Human URL:** https://vlex.com  
-**Developer Portal:** https://developer.vlex.com  
-**APIs.json:** https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/apis.yml
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/apis.yml)
 
 ## Scope
 
@@ -14,106 +12,101 @@ vLex (part of Clio) is a global legal intelligence platform that applies AI to i
 
 ## Tags
 
-AI, Classification, Legal Research, Legal Tech, Natural Language Processing, Privacy
+- AI
+- Classification
+- Legal Research
+- Legal Tech
+- Natural Language Processing
+- Privacy
+
+## Timestamps
+
+- **Created:** 2025-03-01
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### vLex Iceberg Anonymization API
 
-Identifies and anonymizes personally identifiable information in legal text. Pre-trained on legal data for high accuracy on court documents and contracts.
+Identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal data to recognize names, organizations, and sensitive entities within legal documents for privacy protection and data compliance.
 
-**Human URL:** https://developer.vlex.com/apis
+- **Human URL:** [https://developer.vlex.com/apis](https://developer.vlex.com/apis)
+
+#### Tags
+
+- Anonymization
+- NLP
+- Privacy
+- Legal Tech
 
 #### Properties
 
 - [Documentation](https://developer.vlex.com/apis)
-- [OpenAPI](openapi/vlex-iceberg-anonymization-openapi.yml)
-
----
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/openapi/vlex-iceberg-anonymization-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/vlex-iceberg-anonymization.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vlex-iceberg-anonymization.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/vlex-iceberg-legal-research.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vlex-iceberg-legal-research.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### vLex Iceberg Legal Research API
 
-AI-powered legal document search, classification, key phrase extraction, and vCite citation detection across 100M+ documents.
+AI-powered legal research API providing document search, classification, key phrase extraction, citation detection (vCite), and legal entity identification across vLex's corpus of 100+ million legal documents from global jurisdictions.
 
-**Human URL:** https://developer.vlex.com/apis
+- **Human URL:** [https://developer.vlex.com/apis](https://developer.vlex.com/apis)
+
+#### Tags
+
+- AI
+- Case Law
+- Citation Detection
+- Classification
+- Legal Research
+- Legal Tech
+- Search
 
 #### Properties
 
 - [Documentation](https://developer.vlex.com/apis)
-- [OpenAPI](openapi/vlex-iceberg-legal-research-openapi.yml)
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/openapi/vlex-iceberg-legal-research-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/vlex-iceberg-anonymization.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vlex-iceberg-anonymization.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/vlex-iceberg-legal-research.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vlex-iceberg-legal-research.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
----
+### vLex Remote Authentication API
 
-## OpenAPI Specifications
+Single sign-on authentication API for corporate vLex accounts. Generates redirect URLs using HMAC authentication for seamless user access to vLex.com from institutional portals.
 
-| File | Description |
-|---|---|
-| [vlex-iceberg-anonymization-openapi.yml](openapi/vlex-iceberg-anonymization-openapi.yml) | Anonymize text and extract named entities |
-| [vlex-iceberg-legal-research-openapi.yml](openapi/vlex-iceberg-legal-research-openapi.yml) | Search, retrieve, classify, key phrases, and citation detection |
+- **Human URL:** [https://github.com/vlex/remote_auth](https://github.com/vlex/remote_auth)
 
-## Spectral Rules
+#### Tags
 
-| File | Description |
-|---|---|
-| [vlex-rules.yml](rules/vlex-rules.yml) | Spectral ruleset for vLex Iceberg API conventions |
+- Authentication
+- Single Sign-On
+- SSO
 
-## Naftiko Capabilities
+#### Properties
 
-### Shared Definitions
-
-| File | APIs |
-|---|---|
-| [shared/iceberg-anonymization.yaml](capabilities/shared/iceberg-anonymization.yaml) | vLex Anonymization API |
-| [shared/iceberg-legal-research.yaml](capabilities/shared/iceberg-legal-research.yaml) | vLex Legal Research API |
-
-### Workflow Capabilities
-
-| File | Description |
-|---|---|
-| [legal-ai-workflow.yaml](capabilities/legal-ai-workflow.yaml) | Unified REST + MCP for legal research, review, and privacy workflows |
-
-## JSON Schema
-
-| File | Description |
-|---|---|
-| [vlex-legal-document-schema.json](json-schema/vlex-legal-document-schema.json) | Legal document schema with full text, metadata, and citations |
-
-## JSON Structure
-
-| File | Description |
-|---|---|
-| [vlex-legal-document-structure.json](json-structure/vlex-legal-document-structure.json) | Field-level structure for vLex Legal Document |
-
-## JSON-LD Context
-
-| File | Description |
-|---|---|
-| [vlex-context.jsonld](json-ld/vlex-context.jsonld) | Linked data context aligned with schema.org/LegalCase and dct |
-
-## Examples
-
-| File | Description |
-|---|---|
-| [vlex-iceberg-anonymization-anonymize-text-example.json](examples/vlex-iceberg-anonymization-anonymize-text-example.json) | Anonymize PII in case law text |
-
-## Vocabulary
-
-| File | Description |
-|---|---|
-| [vlex-vocabulary.yml](vocabulary/vlex-vocabulary.yml) | vLex terminology: Iceberg, IceNet, vCite, Anonymization, Jurisdiction, Practice Area |
+- [GitHub Repository](https://github.com/vlex/remote_auth)
+- [Postman Collection](collections/vlex-iceberg-anonymization.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vlex-iceberg-anonymization.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/vlex-iceberg-legal-research.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vlex-iceberg-legal-research.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
+- [LinkedIn](https://www.linkedin.com/company/vlex)
 - [Website](https://vlex.com/)
-- [Developer Portal](https://developer.vlex.com/)
+- [Developer  Portal](https://developer.vlex.com/)
 - [Reference](https://developer.vlex.com/apis)
-- [Iceberg AI](https://vlex.com/iceberg-ai)
-- [Use Cases](https://developer.vlex.com/use-cases)
+- [Documentation](https://vlex.com/iceberg-ai)
+- [Use  Cases](https://developer.vlex.com/use-cases)
 - [Integrations](https://vlex.com/integrations)
 - [GitHub Organization](https://github.com/vlex)
+- [Product](https://vlex.com/products/fastcase)
 - [Support](https://support.vlex.com/)
 
 ## Maintainers
 
-**FN:** Kin Lane  
+**FN:** Kin Lane
 **Email:** kin@apievangelist.com

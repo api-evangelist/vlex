@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vLex Iceberg Anonymization API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Anonymization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Anonymize Text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/anonymize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Accepts a text input and identifies all personally identifiable information (names, organizations, and other sensitive entities). Returns the original text with identified entities replaced or tagged for anonymization. Pre-trained on legal data to handle case law, contracts, and regulatory documents."
+        },
+        {
+          "info": {
+            "name": "Extract Named Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/anonymize/entities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Extract named entities from text without replacing them. Returns a list of identified entities with their positions, types, and confidence scores. Useful for entity analysis and document review."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

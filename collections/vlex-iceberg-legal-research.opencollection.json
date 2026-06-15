@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vLex Iceberg Legal Research API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Legal Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Perform a semantic search across the vLex corpus of 100+ million legal documents. Supports natural language queries with jurisdiction, document type, and date filters. Returns ranked results with document metadata."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Legal Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vlex.com/v1/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "vLex document identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a specific legal document by its vLex ID, including full text, metadata, and citation data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Classification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Classify Legal Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/classify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Classify a legal text into practice areas, document types, and extract key legal phrases. Uses IceNet, vLex's legal classification algorithm trained on millions of legal documents."
+        },
+        {
+          "info": {
+            "name": "Extract Key Phrases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/key-phrases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Extract significant legal key phrases, terms of art, and important concepts from a legal text. Returns ranked phrases with context."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Citations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Detect Legal Citations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/citations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Detect and parse legal citations from text using vLex's vCite algorithm. Supports citation formats from 20+ jurisdictions. Returns structured citation data with links to referenced documents where available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
