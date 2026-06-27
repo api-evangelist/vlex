@@ -79,13 +79,13 @@ common:
   - url: https://vlex.com/
     type: Website
   - url: https://developer.vlex.com/
-    type: Developer Portal
+    type: DeveloperPortal
   - url: https://developer.vlex.com/apis
     type: Reference
   - url: https://vlex.com/iceberg-ai
     type: Documentation
   - url: https://developer.vlex.com/use-cases
-    type: Use Cases
+    type: UseCases
   - url: https://vlex.com/integrations
     type: Integrations
   - url: https://github.com/vlex
