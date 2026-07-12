@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vlex-iceberg-anonymization-openapi.yml, openapi/vlex-iceberg-legal-research-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: SubscriptionKey
+  type: apiKey
+  in: header
+  parameter: Ocp-Apim-Subscription-Key
+  description: vLex API subscription key obtained from the developer portal.
+  sources:
+  - openapi/vlex-iceberg-anonymization-openapi.yml
+  - openapi/vlex-iceberg-legal-research-openapi.yml

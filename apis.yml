@@ -74,6 +74,12 @@ apis:
       - type: GitHubRepository
         url: https://github.com/vlex/remote_auth
 common:
+  - type: TrustCenter
+    url: security/vlex-trust-center.yml
+  - type: DomainSecurity
+    url: security/vlex-domain-security.yml
+  - type: Authentication
+    url: authentication/vlex-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/vlex
   - url: https://vlex.com/
@@ -94,6 +100,8 @@ common:
     type: Product
   - url: https://support.vlex.com/
     type: Support
+  - url: https://vlex.com/news
+    type: Blog
 integrations:
   - name: vLex
   - name: vLex Custom AI Solutions
