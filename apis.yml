@@ -74,6 +74,8 @@ apis:
       - type: GitHubRepository
         url: https://github.com/vlex/remote_auth
 common:
+  - type: AgenticAccess
+    url: agentic-access/vlex-agentic-access.yml
   - type: TrustCenter
     url: security/vlex-trust-center.yml
   - type: DomainSecurity
