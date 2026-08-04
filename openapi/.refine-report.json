@@ -1,0 +1,22 @@
+{
+  "provider": "vlex",
+  "sources": [
+    "vlex-anonymization-api-openapi.yml",
+    "vlex-citations-api-openapi.yml",
+    "vlex-classification-api-openapi.yml",
+    "vlex-documents-api-openapi.yml",
+    "vlex-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "vlex-anonymization-api-openapi.yml",
+    "vlex-citations-api-openapi.yml",
+    "vlex-classification-api-openapi.yml",
+    "vlex-documents-api-openapi.yml",
+    "vlex-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

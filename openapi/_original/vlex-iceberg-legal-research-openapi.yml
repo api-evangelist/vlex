@@ -1,0 +1,447 @@
+openapi: 3.1.0
+info:
+  title: vLex Iceberg Legal Research API
+  description: >-
+    The vLex Iceberg Legal Research API provides AI-powered access to legal
+    documents, case law, statutes, and regulations from global jurisdictions.
+    Capabilities include semantic document search, AI classification, key
+    phrase extraction, and citation detection (vCite). The corpus spans 100+
+    million documents from 2,000+ multilingual sources.
+  version: 1.0.0
+  contact:
+    name: vLex Developer Support
+    url: https://developer.vlex.com/
+  license:
+    name: Proprietary
+    url: https://vlex.com/
+externalDocs:
+  description: vLex Developer Portal
+  url: https://developer.vlex.com/apis
+servers:
+  - url: https://api.vlex.com
+    description: vLex Iceberg Legal Research API
+tags:
+  - name: Search
+    description: Search the vLex legal document corpus
+  - name: Documents
+    description: Retrieve individual legal documents
+  - name: Classification
+    description: Classify legal documents and extract key phrases
+  - name: Citations
+    description: Detect and resolve legal citations (vCite)
+paths:
+  /v1/search:
+    post:
+      operationId: searchDocuments
+      summary: Search Legal Documents
+      description: >-
+        Perform a semantic search across the vLex corpus of 100+ million legal
+        documents. Supports natural language queries with jurisdiction, document
+        type, and date filters. Returns ranked results with document metadata.
+      tags:
+        - Search
+      security:
+        - SubscriptionKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            examples:
+              caseSearch:
+                summary: Search for employment discrimination cases
+                value:
+                  query: "employment discrimination hostile work environment"
+                  jurisdiction: "US"
+                  document_type: "case_law"
+                  date_from: "2020-01-01"
+                  page: 1
+                  per_page: 10
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/documents/{document_id}:
+    get:
+      operationId: getDocument
+      summary: Get Legal Document
+      description: Retrieve a specific legal document by its vLex ID, including full text, metadata, and citation data.
+      tags:
+        - Documents
+      security:
+        - SubscriptionKey: []
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: vLex document identifier
+      responses:
+        '200':
+          description: Legal document
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegalDocument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /v1/classify:
+    post:
+      operationId: classifyDocument
+      summary: Classify Legal Document
+      description: >-
+        Classify a legal text into practice areas, document types, and extract
+        key legal phrases. Uses IceNet, vLex's legal classification algorithm
+        trained on millions of legal documents.
+      tags:
+        - Classification
+      security:
+        - SubscriptionKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClassifyRequest'
+      responses:
+        '200':
+          description: Classification results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassifyResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/key-phrases:
+    post:
+      operationId: extractKeyPhrases
+      summary: Extract Key Phrases
+      description: >-
+        Extract significant legal key phrases, terms of art, and important
+        concepts from a legal text. Returns ranked phrases with context.
+      tags:
+        - Classification
+      security:
+        - SubscriptionKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeyPhrasesRequest'
+      responses:
+        '200':
+          description: Key phrases
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyPhrasesResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/citations:
+    post:
+      operationId: detectCitations
+      summary: Detect Legal Citations
+      description: >-
+        Detect and parse legal citations from text using vLex's vCite algorithm.
+        Supports citation formats from 20+ jurisdictions. Returns structured
+        citation data with links to referenced documents where available.
+      tags:
+        - Citations
+      security:
+        - SubscriptionKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CitationRequest'
+      responses:
+        '200':
+          description: Detected citations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CitationResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    SubscriptionKey:
+      type: apiKey
+      in: header
+      name: Ocp-Apim-Subscription-Key
+      description: vLex API subscription key from the developer portal.
+  schemas:
+    SearchRequest:
+      type: object
+      required:
+        - query
+      description: Request body for legal document search.
+      properties:
+        query:
+          type: string
+          description: Natural language or keyword search query.
+        jurisdiction:
+          type: string
+          description: ISO 3166-1 country code or jurisdiction code (e.g. US, GB, EU).
+          example: US
+        document_type:
+          type: string
+          enum:
+            - case_law
+            - statute
+            - regulation
+            - secondary_source
+            - contract
+            - all
+          default: all
+        date_from:
+          type: string
+          format: date
+          description: Filter documents published on or after this date.
+        date_to:
+          type: string
+          format: date
+          description: Filter documents published on or before this date.
+        language:
+          type: string
+          description: BCP-47 language filter.
+          example: en
+        page:
+          type: integer
+          default: 1
+        per_page:
+          type: integer
+          default: 10
+          maximum: 50
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        query_time_ms:
+          type: integer
+    SearchResult:
+      type: object
+      properties:
+        document_id:
+          type: string
+          description: vLex document identifier.
+        title:
+          type: string
+          description: Document title.
+        snippet:
+          type: string
+          description: Relevant text excerpt matching the query.
+        document_type:
+          type: string
+          description: Type of legal document.
+        jurisdiction:
+          type: string
+        date:
+          type: string
+          format: date
+        relevance_score:
+          type: number
+          format: float
+        url:
+          type: string
+          format: uri
+    LegalDocument:
+      type: object
+      description: A full legal document from the vLex corpus.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        document_type:
+          type: string
+        jurisdiction:
+          type: string
+        date:
+          type: string
+          format: date
+        language:
+          type: string
+        full_text:
+          type: string
+          description: Full text of the legal document.
+        metadata:
+          type: object
+          description: Additional document metadata (court, parties, docket number, etc.).
+          additionalProperties: true
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+        url:
+          type: string
+          format: uri
+    ClassifyRequest:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: Legal text to classify.
+          minLength: 50
+          maxLength: 100000
+        language:
+          type: string
+          default: en
+    ClassifyResponse:
+      type: object
+      properties:
+        practice_areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Classification'
+          description: Detected legal practice areas.
+        document_type:
+          $ref: '#/components/schemas/Classification'
+        key_concepts:
+          type: array
+          items:
+            type: string
+          description: Key legal concepts identified.
+    Classification:
+      type: object
+      properties:
+        label:
+          type: string
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+    KeyPhrasesRequest:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          minLength: 50
+          maxLength: 100000
+        max_phrases:
+          type: integer
+          default: 20
+          maximum: 100
+        language:
+          type: string
+          default: en
+    KeyPhrasesResponse:
+      type: object
+      properties:
+        key_phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyPhrase'
+        processing_time_ms:
+          type: integer
+    KeyPhrase:
+      type: object
+      properties:
+        phrase:
+          type: string
+        score:
+          type: number
+          format: float
+        occurrences:
+          type: integer
+    CitationRequest:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: Legal text containing citations to detect.
+        jurisdiction:
+          type: string
+          description: Primary jurisdiction for citation parsing (helps with ambiguous formats).
+    CitationResponse:
+      type: object
+      properties:
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+        citation_count:
+          type: integer
+    Citation:
+      type: object
+      description: A detected legal citation.
+      properties:
+        raw_text:
+          type: string
+          description: Citation text as found in the document.
+          example: "347 U.S. 483 (1954)"
+        document_id:
+          type: string
+          description: vLex ID of the referenced document, if resolved.
+        citation_type:
+          type: string
+          description: Type of citation (case, statute, regulation, etc.).
+        jurisdiction:
+          type: string
+        year:
+          type: integer
+        start_offset:
+          type: integer
+        end_offset:
+          type: integer
+        url:
+          type: string
+          format: uri
+          description: Link to the cited document on vlex.com.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing subscription key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Document not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
