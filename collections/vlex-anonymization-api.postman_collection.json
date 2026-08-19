@@ -1,0 +1,530 @@
+{
+  "item": [
+    {
+      "id": "61337b06-6913-4158-8db5-7e158faaa1e1",
+      "name": "Anonymization",
+      "description": {
+        "content": "Identify and anonymize personally identifiable information in text",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5238c516-8ecd-4ddf-add5-88b57a3fdf54",
+          "name": "Anonymize Text",
+          "request": {
+            "name": "Anonymize Text",
+            "description": {
+              "content": "Accepts a text input and identifies all personally identifiable information (names, organizations, and other sensitive entities). Returns the original text with identified entities replaced or tagged for anonymization. Pre-trained on legal data to handle case law, contracts, and regulatory documents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "anonymize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"mode\": \"replace\",\n  \"replacement_token\": \"[REDACTED]\",\n  \"entity_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"language\": \"en\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88d96fb2-1d0c-42f6-9061-7dbd3c771b95",
+              "name": "Anonymized text with identified entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"In the case of John Smith v. ABC Corporation, filed on March 15, 2026 in the District Court of New York, the plaintiff John Smith alleges that...\",\n  \"mode\": \"replace\",\n  \"replacement_token\": \"[PERSON]\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"anonymized_text\": \"string\",\n  \"entities\": [\n    {\n      \"text\": \"John Smith\",\n      \"entity_type\": \"PERSON\",\n      \"confidence\": 0.97,\n      \"start_offset\": 5998,\n      \"end_offset\": 532\n    },\n    {\n      \"text\": \"John Smith\",\n      \"entity_type\": \"PERSON\",\n      \"confidence\": 0.97,\n      \"start_offset\": 468,\n      \"end_offset\": 8587\n    }\n  ],\n  \"entity_count\": 8481,\n  \"processing_time_ms\": 9467\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60072c00-04cb-48e6-9d7c-b8f60400b9a8",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"In the case of John Smith v. ABC Corporation, filed on March 15, 2026 in the District Court of New York, the plaintiff John Smith alleges that...\",\n  \"mode\": \"replace\",\n  \"replacement_token\": \"[PERSON]\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"code\": 8164\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec8f0656-06e8-47e8-ab00-cf9d21748cb8",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"In the case of John Smith v. ABC Corporation, filed on March 15, 2026 in the District Court of New York, the plaintiff John Smith alleges that...\",\n  \"mode\": \"replace\",\n  \"replacement_token\": \"[PERSON]\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"code\": 8164\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fb80086-2c0b-48e8-aeec-14b2e5eaffab",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "anonymize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"In the case of John Smith v. ABC Corporation, filed on March 15, 2026 in the District Court of New York, the plaintiff John Smith alleges that...\",\n  \"mode\": \"replace\",\n  \"replacement_token\": \"[PERSON]\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"code\": 8164\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1dae6a56-4e9a-4425-9252-a2ab43bb224c",
+          "name": "Extract Named Entities",
+          "request": {
+            "name": "Extract Named Entities",
+            "description": {
+              "content": "Extract named entities from text without replacing them. Returns a list of identified entities with their positions, types, and confidence scores. Useful for entity analysis and document review.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "anonymize",
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"entity_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"language\": \"en\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c2196a4-982c-4ff5-a66f-6e7d6a3cc8cb",
+              "name": "List of identified entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "anonymize",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"entity_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entities\": [\n    {\n      \"text\": \"John Smith\",\n      \"entity_type\": \"PERSON\",\n      \"confidence\": 0.97,\n      \"start_offset\": 316,\n      \"end_offset\": 7033\n    },\n    {\n      \"text\": \"John Smith\",\n      \"entity_type\": \"PERSON\",\n      \"confidence\": 0.97,\n      \"start_offset\": 2608,\n      \"end_offset\": 8907\n    }\n  ],\n  \"entity_count\": 6421,\n  \"processing_time_ms\": 1117\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0c69700-df49-4e8d-93ce-f86f39fa8c36",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "anonymize",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"entity_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"code\": 8164\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd70da47-cf6d-4593-b222-11802458a101",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "anonymize",
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"entity_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"language\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"code\": 8164\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vlex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c7650069-2db5-41f0-a1d8-47a175df338b",
+    "name": "vLex Iceberg Anonymization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The vLex Iceberg Anonymization API identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal data to recognize personal names, organizations, and sensitive entities within legal documents, contracts, and court filings for privacy protection and data compliance workflows.\n\nContact Support:\n Name: vLex Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

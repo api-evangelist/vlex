@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vLex Iceberg Anonymization Citations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Citations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Detect Legal Citations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/citations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Detect and parse legal citations from text using vLex's vCite algorithm. Supports citation formats from 20+ jurisdictions. Returns structured citation data with links to referenced documents where available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

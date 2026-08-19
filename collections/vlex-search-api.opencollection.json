@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vLex Iceberg Anonymization Search API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Legal Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Perform a semantic search across the vLex corpus of 100+ million legal documents. Supports natural language queries with jurisdiction, document type, and date filters. Returns ranked results with document metadata."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

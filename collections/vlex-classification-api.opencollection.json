@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vLex Iceberg Anonymization Classification API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Classification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Classify Legal Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/classify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Classify a legal text into practice areas, document types, and extract key legal phrases. Uses IceNet, vLex's legal classification algorithm trained on millions of legal documents."
+        },
+        {
+          "info": {
+            "name": "Extract Key Phrases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vlex.com/v1/key-phrases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Extract significant legal key phrases, terms of art, and important concepts from a legal text. Returns ranked phrases with context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

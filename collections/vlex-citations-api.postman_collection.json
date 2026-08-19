@@ -1,0 +1,201 @@
+{
+  "item": [
+    {
+      "id": "53631883-9420-4791-a2d2-1e01f403ab12",
+      "name": "Citations",
+      "description": {
+        "content": "Detect and resolve legal citations (vCite)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75ed9edc-d349-4a12-8b3a-0cf1779d445e",
+          "name": "Detect Legal Citations",
+          "request": {
+            "name": "Detect Legal Citations",
+            "description": {
+              "content": "Detect and parse legal citations from text using vLex's vCite algorithm. Supports citation formats from 20+ jurisdictions. Returns structured citation data with links to referenced documents where available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "citations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"jurisdiction\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69d53f19-83f7-415a-860f-69c21806c07f",
+              "name": "Detected citations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "citations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"citations\": [\n    {\n      \"raw_text\": \"347 U.S. 483 (1954)\",\n      \"document_id\": \"string\",\n      \"citation_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"year\": 8966,\n      \"start_offset\": 1823,\n      \"end_offset\": 7877,\n      \"url\": \"http://sAoOsvGYSv.yexxc\"\n    },\n    {\n      \"raw_text\": \"347 U.S. 483 (1954)\",\n      \"document_id\": \"string\",\n      \"citation_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"year\": 4463,\n      \"start_offset\": 355,\n      \"end_offset\": 3485,\n      \"url\": \"http://ymWkiKr.lpesHqlXLMoET9EjD94D\"\n    }\n  ],\n  \"citation_count\": 4670\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f448473-02be-4981-aa27-c6bdce9d4f49",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "citations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vlex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3170a44d-c0f6-437e-acd6-d26c6fc11948",
+    "name": "vLex Iceberg Anonymization Citations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The vLex Iceberg Anonymization API identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal data to recognize personal names, organizations, and sensitive entities within legal documents, contracts, and court filings for privacy protection and data compliance workflows.\n\nContact Support:\n Name: vLex Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

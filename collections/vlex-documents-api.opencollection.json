@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "vLex Iceberg Anonymization Documents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Legal Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vlex.com/v1/documents/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "vLex document identifier"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Ocp-Apim-Subscription-Key",
+              "value": "{{Ocp-Apim-Subscription-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve a specific legal document by its vLex ID, including full text, metadata, and citation data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "e5529992-f9fa-46fe-a61d-9ce1366a783e",
+      "name": "Documents",
+      "description": {
+        "content": "Retrieve individual legal documents",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8833f4e6-1a5c-4a14-a48a-4a67db2de6d4",
+          "name": "Get Legal Document",
+          "request": {
+            "name": "Get Legal Document",
+            "description": {
+              "content": "Retrieve a specific legal document by its vLex ID, including full text, metadata, and citation data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "documents",
+                ":document_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "document_id",
+                  "description": "(Required) vLex document identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Ocp-Apim-Subscription-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5672b467-d2fa-4200-8396-0f545df77c65",
+              "name": "Legal document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) vLex document identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"document_type\": \"string\",\n  \"jurisdiction\": \"string\",\n  \"date\": \"1948-04-11\",\n  \"language\": \"string\",\n  \"full_text\": \"string\",\n  \"metadata\": {\n    \"key_0\": 2598.1938195535604,\n    \"key_1\": \"string\"\n  },\n  \"citations\": [\n    {\n      \"raw_text\": \"347 U.S. 483 (1954)\",\n      \"document_id\": \"string\",\n      \"citation_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"year\": 569,\n      \"start_offset\": 6396,\n      \"end_offset\": 7289,\n      \"url\": \"https://njeLLELTpTHARbOr.xyaXYkxLw00Zn1XSkIo-FS71F.CgH6cT\"\n    },\n    {\n      \"raw_text\": \"347 U.S. 483 (1954)\",\n      \"document_id\": \"string\",\n      \"citation_type\": \"string\",\n      \"jurisdiction\": \"string\",\n      \"year\": 5131,\n      \"start_offset\": 4505,\n      \"end_offset\": 8776,\n      \"url\": \"http://UinVOMnjUtsVF.cxzZIr1vTZ9nXFwtVkG3PLjBFRXqMwQRESjShgRDnx3YfI6..RGo5Ap2Jlzf\"\n    }\n  ],\n  \"url\": \"http://MCvhBgLklUMeSlmcYXmFaMDOBAscSmD.qltokJTJt4lW5yBzeLhW.ssi\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de7760f5-e73b-4be4-87b1-27ef27af384b",
+              "name": "Invalid or missing subscription key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) vLex document identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9444222b-207c-4e6d-a8d6-b54926b56422",
+              "name": "Document not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "documents",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) vLex document identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Ocp-Apim-Subscription-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vlex.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e8e91330-4771-4626-a99e-2ff7fdbd03a8",
+    "name": "vLex Iceberg Anonymization Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The vLex Iceberg Anonymization API identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal data to recognize personal names, organizations, and sensitive entities within legal documents, contracts, and court filings for privacy protection and data compliance workflows.\n\nContact Support:\n Name: vLex Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
