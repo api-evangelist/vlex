@@ -6,6 +6,18 @@ description: >-
   REST APIs for legal document anonymization, classification, key phrase extraction, citation detection, and AI-powered
   legal research. vLex also offers the Fastcase Legal Data API for raw legal data feeds.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -110,6 +122,8 @@ apis:
   - type: Documentation
     url: https://developer.vlex.com/apis
 common:
+  - type: IssueTracker
+    url: https://github.com/vlex/remote_auth/issues
   - type: AgenticAccess
     url: agentic-access/vlex-agentic-access.yml
   - type: TrustCenter
