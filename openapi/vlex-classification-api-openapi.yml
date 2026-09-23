@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: vLex Iceberg Anonymization Classification API
-  description: The vLex Iceberg Anonymization API identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal data to recognize personal names, organizations, and sensitive entities within legal documents, contracts, and court filings for privacy protection and data compliance workflows.
+  title: vLex Iceberg Legal Research Classification API
+  description: The vLex Iceberg Legal Research API provides AI-powered access to legal documents, case law, statutes, and regulations from global jurisdictions. Capabilities include semantic document search, AI classification, key phrase extraction, and citation detection (vCite). The corpus spans 100+ million documents from 2,000+ multilingual sources.
   version: 1.0.0
   contact:
     name: vLex Developer Support
@@ -11,7 +11,7 @@ info:
     url: https://vlex.com/
 servers:
 - url: https://api.vlex.com
-  description: vLex Iceberg API
+  description: vLex Iceberg Legal Research API
 tags:
 - name: Classification
   description: Classify legal documents and extract key phrases
@@ -67,30 +67,22 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing subscription key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Classification:
+    ClassifyResponse:
       type: object
       properties:
-        label:
-          type: string
-        confidence:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
+        practice_areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Classification'
+          description: Detected legal practice areas.
+        document_type:
+          $ref: '#/components/schemas/Classification'
+        key_concepts:
+          type: array
+          items:
+            type: string
+          description: Key legal concepts identified.
     KeyPhrasesRequest:
       type: object
       required:
@@ -107,6 +99,15 @@ components:
         language:
           type: string
           default: en
+    KeyPhrasesResponse:
+      type: object
+      properties:
+        key_phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyPhrase'
+        processing_time_ms:
+          type: integer
     Error:
       type: object
       properties:
@@ -114,21 +115,6 @@ components:
           type: string
         message:
           type: string
-    ClassifyResponse:
-      type: object
-      properties:
-        practice_areas:
-          type: array
-          items:
-            $ref: '#/components/schemas/Classification'
-          description: Detected legal practice areas.
-        document_type:
-          $ref: '#/components/schemas/Classification'
-        key_concepts:
-          type: array
-          items:
-            type: string
-          description: Key legal concepts identified.
     ClassifyRequest:
       type: object
       required:
@@ -142,15 +128,16 @@ components:
         language:
           type: string
           default: en
-    KeyPhrasesResponse:
+    Classification:
       type: object
       properties:
-        key_phrases:
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyPhrase'
-        processing_time_ms:
-          type: integer
+        label:
+          type: string
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
     KeyPhrase:
       type: object
       properties:
@@ -161,12 +148,25 @@ components:
           format: float
         occurrences:
           type: integer
+  responses:
+    Unauthorized:
+      description: Invalid or missing subscription key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     SubscriptionKey:
       type: apiKey
       in: header
       name: Ocp-Apim-Subscription-Key
-      description: vLex API subscription key obtained from the developer portal.
+      description: vLex API subscription key from the developer portal.
 externalDocs:
   description: vLex Developer Portal
   url: https://developer.vlex.com/apis

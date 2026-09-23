@@ -1,11 +1,8 @@
 {
   "provider": "vlex",
   "sources": [
-    "vlex-anonymization-api-openapi.yml",
-    "vlex-citations-api-openapi.yml",
-    "vlex-classification-api-openapi.yml",
-    "vlex-documents-api-openapi.yml",
-    "vlex-search-api-openapi.yml"
+    "_original/vlex-iceberg-anonymization-openapi.yml",
+    "_original/vlex-iceberg-legal-research-openapi.yml"
   ],
   "outputs": [
     "vlex-anonymization-api-openapi.yml",
@@ -17,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vlex-iceberg-anonymization-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vlex-iceberg-legal-research-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "vlex-anonymization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vlex-citations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vlex-classification-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vlex-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vlex-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

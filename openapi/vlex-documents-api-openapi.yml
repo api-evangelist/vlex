@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: vLex Iceberg Anonymization Documents API
-  description: The vLex Iceberg Anonymization API identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal data to recognize personal names, organizations, and sensitive entities within legal documents, contracts, and court filings for privacy protection and data compliance workflows.
+  title: vLex Iceberg Legal Research Documents API
+  description: The vLex Iceberg Legal Research API provides AI-powered access to legal documents, case law, statutes, and regulations from global jurisdictions. Capabilities include semantic document search, AI classification, key phrase extraction, and citation detection (vCite). The corpus spans 100+ million documents from 2,000+ multilingual sources.
   version: 1.0.0
   contact:
     name: vLex Developer Support
@@ -11,7 +11,7 @@ info:
     url: https://vlex.com/
 servers:
 - url: https://api.vlex.com
-  description: vLex Iceberg API
+  description: vLex Iceberg Legal Research API
 tags:
 - name: Documents
   description: Retrieve individual legal documents
@@ -44,46 +44,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing subscription key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Document not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Citation:
-      type: object
-      description: A detected legal citation.
-      properties:
-        raw_text:
-          type: string
-          description: Citation text as found in the document.
-          example: 347 U.S. 483 (1954)
-        document_id:
-          type: string
-          description: vLex ID of the referenced document, if resolved.
-        citation_type:
-          type: string
-          description: Type of citation (case, statute, regulation, etc.).
-        jurisdiction:
-          type: string
-        year:
-          type: integer
-        start_offset:
-          type: integer
-        end_offset:
-          type: integer
-        url:
-          type: string
-          format: uri
-          description: Link to the cited document on vlex.com.
     LegalDocument:
       type: object
       description: A full legal document from the vLex corpus.
@@ -122,12 +83,51 @@ components:
           type: string
         message:
           type: string
+    Citation:
+      type: object
+      description: A detected legal citation.
+      properties:
+        raw_text:
+          type: string
+          description: Citation text as found in the document.
+          example: 347 U.S. 483 (1954)
+        document_id:
+          type: string
+          description: vLex ID of the referenced document, if resolved.
+        citation_type:
+          type: string
+          description: Type of citation (case, statute, regulation, etc.).
+        jurisdiction:
+          type: string
+        year:
+          type: integer
+        start_offset:
+          type: integer
+        end_offset:
+          type: integer
+        url:
+          type: string
+          format: uri
+          description: Link to the cited document on vlex.com.
+  responses:
+    Unauthorized:
+      description: Invalid or missing subscription key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Document not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     SubscriptionKey:
       type: apiKey
       in: header
       name: Ocp-Apim-Subscription-Key
-      description: vLex API subscription key obtained from the developer portal.
+      description: vLex API subscription key from the developer portal.
 externalDocs:
   description: vLex Developer Portal
   url: https://developer.vlex.com/apis

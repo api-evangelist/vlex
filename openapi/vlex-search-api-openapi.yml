@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: vLex Iceberg Anonymization Search API
-  description: The vLex Iceberg Anonymization API identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal data to recognize personal names, organizations, and sensitive entities within legal documents, contracts, and court filings for privacy protection and data compliance workflows.
+  title: vLex Iceberg Legal Research Search API
+  description: The vLex Iceberg Legal Research API provides AI-powered access to legal documents, case law, statutes, and regulations from global jurisdictions. Capabilities include semantic document search, AI classification, key phrase extraction, and citation detection (vCite). The corpus spans 100+ million documents from 2,000+ multilingual sources.
   version: 1.0.0
   contact:
     name: vLex Developer Support
@@ -11,7 +11,7 @@ info:
     url: https://vlex.com/
 servers:
 - url: https://api.vlex.com
-  description: vLex Iceberg API
+  description: vLex Iceberg Legal Research API
 tags:
 - name: Search
   description: Search the vLex legal document corpus
@@ -53,20 +53,33 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing subscription key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    SearchResult:
+      type: object
+      properties:
+        document_id:
+          type: string
+          description: vLex document identifier.
+        title:
+          type: string
+          description: Document title.
+        snippet:
+          type: string
+          description: Relevant text excerpt matching the query.
+        document_type:
+          type: string
+          description: Type of legal document.
+        jurisdiction:
+          type: string
+        date:
+          type: string
+          format: date
+        relevance_score:
+          type: number
+          format: float
+        url:
+          type: string
+          format: uri
     SearchResponse:
       type: object
       properties:
@@ -82,6 +95,13 @@ components:
           type: integer
         query_time_ms:
           type: integer
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     SearchRequest:
       type: object
       required:
@@ -124,45 +144,25 @@ components:
           type: integer
           default: 10
           maximum: 50
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    SearchResult:
-      type: object
-      properties:
-        document_id:
-          type: string
-          description: vLex document identifier.
-        title:
-          type: string
-          description: Document title.
-        snippet:
-          type: string
-          description: Relevant text excerpt matching the query.
-        document_type:
-          type: string
-          description: Type of legal document.
-        jurisdiction:
-          type: string
-        date:
-          type: string
-          format: date
-        relevance_score:
-          type: number
-          format: float
-        url:
-          type: string
-          format: uri
+  responses:
+    Unauthorized:
+      description: Invalid or missing subscription key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     SubscriptionKey:
       type: apiKey
       in: header
       name: Ocp-Apim-Subscription-Key
-      description: vLex API subscription key obtained from the developer portal.
+      description: vLex API subscription key from the developer portal.
 externalDocs:
   description: vLex Developer Portal
   url: https://developer.vlex.com/apis
