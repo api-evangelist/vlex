@@ -42,17 +42,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    CitationRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: Legal text containing citations to detect.
-        jurisdiction:
-          type: string
-          description: Primary jurisdiction for citation parsing (helps with ambiguous formats).
     Error:
       type: object
       properties:
@@ -60,15 +49,6 @@ components:
           type: string
         message:
           type: string
-    CitationResponse:
-      type: object
-      properties:
-        citations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Citation'
-        citation_count:
-          type: integer
     Citation:
       type: object
       description: A detected legal citation.
@@ -95,6 +75,26 @@ components:
           type: string
           format: uri
           description: Link to the cited document on vlex.com.
+    CitationResponse:
+      type: object
+      properties:
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+        citation_count:
+          type: integer
+    CitationRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Legal text containing citations to detect.
+        jurisdiction:
+          type: string
+          description: Primary jurisdiction for citation parsing (helps with ambiguous formats).
   responses:
     Unauthorized:
       description: Invalid or missing subscription key

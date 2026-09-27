@@ -54,6 +54,21 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    SearchResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        total:
+          type: integer
+        page:
+          type: integer
+        per_page:
+          type: integer
+        query_time_ms:
+          type: integer
     SearchResult:
       type: object
       properties:
@@ -80,28 +95,6 @@ components:
         url:
           type: string
           format: uri
-    SearchResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
-        total:
-          type: integer
-        page:
-          type: integer
-        per_page:
-          type: integer
-        query_time_ms:
-          type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
     SearchRequest:
       type: object
       required:
@@ -144,6 +137,13 @@ components:
           type: integer
           default: 10
           maximum: 50
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
   responses:
     Unauthorized:
       description: Invalid or missing subscription key

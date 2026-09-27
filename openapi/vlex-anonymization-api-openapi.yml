@@ -98,67 +98,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    ExtractEntitiesRequest:
-      type: object
-      required:
-      - text
-      description: Request body for entity extraction.
-      properties:
-        text:
-          type: string
-          description: Input text to analyze.
-          minLength: 1
-          maxLength: 50000
-        entity_types:
-          type: array
-          items:
-            type: string
-          description: Entity types to extract.
-        language:
-          type: string
-          default: en
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-        code:
-          type: integer
-    Entity:
-      type: object
-      description: A named entity identified in the input text.
-      properties:
-        text:
-          type: string
-          description: The original entity text as it appears in the document.
-          example: John Smith
-        entity_type:
-          type: string
-          description: The type of entity detected.
-          enum:
-          - PERSON
-          - ORGANIZATION
-          - LOCATION
-          - DATE
-          - EMAIL
-          - PHONE
-          - ID_NUMBER
-          example: PERSON
-        confidence:
-          type: number
-          format: float
-          description: Confidence score between 0 and 1.
-          minimum: 0
-          maximum: 1
-          example: 0.97
-        start_offset:
-          type: integer
-          description: Character offset where the entity begins in the input text.
-        end_offset:
-          type: integer
-          description: Character offset where the entity ends.
     ExtractEntitiesResponse:
       type: object
       description: Extracted entities from the input text.
@@ -189,6 +128,34 @@ components:
         processing_time_ms:
           type: integer
           description: Processing time in milliseconds.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        code:
+          type: integer
+    ExtractEntitiesRequest:
+      type: object
+      required:
+      - text
+      description: Request body for entity extraction.
+      properties:
+        text:
+          type: string
+          description: Input text to analyze.
+          minLength: 1
+          maxLength: 50000
+        entity_types:
+          type: array
+          items:
+            type: string
+          description: Entity types to extract.
+        language:
+          type: string
+          default: en
     AnonymizeRequest:
       type: object
       required:
@@ -230,6 +197,39 @@ components:
           description: BCP-47 language tag of the input text.
           default: en
           example: en
+    Entity:
+      type: object
+      description: A named entity identified in the input text.
+      properties:
+        text:
+          type: string
+          description: The original entity text as it appears in the document.
+          example: John Smith
+        entity_type:
+          type: string
+          description: The type of entity detected.
+          enum:
+          - PERSON
+          - ORGANIZATION
+          - LOCATION
+          - DATE
+          - EMAIL
+          - PHONE
+          - ID_NUMBER
+          example: PERSON
+        confidence:
+          type: number
+          format: float
+          description: Confidence score between 0 and 1.
+          minimum: 0
+          maximum: 1
+          example: 0.97
+        start_offset:
+          type: integer
+          description: Character offset where the entity begins in the input text.
+        end_offset:
+          type: integer
+          description: Character offset where the entity ends.
   securitySchemes:
     SubscriptionKey:
       type: apiKey

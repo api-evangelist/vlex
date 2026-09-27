@@ -44,38 +44,20 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Document not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid or missing subscription key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    LegalDocument:
-      type: object
-      description: A full legal document from the vLex corpus.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        document_type:
-          type: string
-        jurisdiction:
-          type: string
-        date:
-          type: string
-          format: date
-        language:
-          type: string
-        full_text:
-          type: string
-          description: Full text of the legal document.
-        metadata:
-          type: object
-          description: Additional document metadata (court, parties, docket number, etc.).
-          additionalProperties: true
-        citations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Citation'
-        url:
-          type: string
-          format: uri
     Error:
       type: object
       properties:
@@ -109,19 +91,37 @@ components:
           type: string
           format: uri
           description: Link to the cited document on vlex.com.
-  responses:
-    Unauthorized:
-      description: Invalid or missing subscription key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Document not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    LegalDocument:
+      type: object
+      description: A full legal document from the vLex corpus.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        document_type:
+          type: string
+        jurisdiction:
+          type: string
+        date:
+          type: string
+          format: date
+        language:
+          type: string
+        full_text:
+          type: string
+          description: Full text of the legal document.
+        metadata:
+          type: object
+          description: Additional document metadata (court, parties, docket number, etc.).
+          additionalProperties: true
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+        url:
+          type: string
+          format: uri
   securitySchemes:
     SubscriptionKey:
       type: apiKey
