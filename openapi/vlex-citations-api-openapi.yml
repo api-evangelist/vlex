@@ -49,6 +49,17 @@ components:
           type: string
         message:
           type: string
+    CitationRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Legal text containing citations to detect.
+        jurisdiction:
+          type: string
+          description: Primary jurisdiction for citation parsing (helps with ambiguous formats).
     Citation:
       type: object
       description: A detected legal citation.
@@ -84,17 +95,6 @@ components:
             $ref: '#/components/schemas/Citation'
         citation_count:
           type: integer
-    CitationRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: Legal text containing citations to detect.
-        jurisdiction:
-          type: string
-          description: Primary jurisdiction for citation parsing (helps with ambiguous formats).
   responses:
     Unauthorized:
       description: Invalid or missing subscription key

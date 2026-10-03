@@ -68,19 +68,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ClassifyRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: Legal text to classify.
-          minLength: 50
-          maxLength: 100000
-        language:
-          type: string
-          default: en
     Error:
       type: object
       properties:
@@ -88,22 +75,6 @@ components:
           type: string
         message:
           type: string
-    KeyPhrasesRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          minLength: 50
-          maxLength: 100000
-        max_phrases:
-          type: integer
-          default: 20
-          maximum: 100
-        language:
-          type: string
-          default: en
     KeyPhrasesResponse:
       type: object
       properties:
@@ -113,21 +84,6 @@ components:
             $ref: '#/components/schemas/KeyPhrase'
         processing_time_ms:
           type: integer
-    ClassifyResponse:
-      type: object
-      properties:
-        practice_areas:
-          type: array
-          items:
-            $ref: '#/components/schemas/Classification'
-          description: Detected legal practice areas.
-        document_type:
-          $ref: '#/components/schemas/Classification'
-        key_concepts:
-          type: array
-          items:
-            type: string
-          description: Key legal concepts identified.
     Classification:
       type: object
       properties:
@@ -148,6 +104,50 @@ components:
           format: float
         occurrences:
           type: integer
+    ClassifyResponse:
+      type: object
+      properties:
+        practice_areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/Classification'
+          description: Detected legal practice areas.
+        document_type:
+          $ref: '#/components/schemas/Classification'
+        key_concepts:
+          type: array
+          items:
+            type: string
+          description: Key legal concepts identified.
+    ClassifyRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Legal text to classify.
+          minLength: 50
+          maxLength: 100000
+        language:
+          type: string
+          default: en
+    KeyPhrasesRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          minLength: 50
+          maxLength: 100000
+        max_phrases:
+          type: integer
+          default: 20
+          maximum: 100
+        language:
+          type: string
+          default: en
   responses:
     Unauthorized:
       description: Invalid or missing subscription key

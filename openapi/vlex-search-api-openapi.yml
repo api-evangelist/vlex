@@ -69,32 +69,13 @@ components:
           type: integer
         query_time_ms:
           type: integer
-    SearchResult:
+    Error:
       type: object
       properties:
-        document_id:
+        error:
           type: string
-          description: vLex document identifier.
-        title:
+        message:
           type: string
-          description: Document title.
-        snippet:
-          type: string
-          description: Relevant text excerpt matching the query.
-        document_type:
-          type: string
-          description: Type of legal document.
-        jurisdiction:
-          type: string
-        date:
-          type: string
-          format: date
-        relevance_score:
-          type: number
-          format: float
-        url:
-          type: string
-          format: uri
     SearchRequest:
       type: object
       required:
@@ -137,22 +118,41 @@ components:
           type: integer
           default: 10
           maximum: 50
-    Error:
+    SearchResult:
       type: object
       properties:
-        error:
+        document_id:
           type: string
-        message:
+          description: vLex document identifier.
+        title:
           type: string
+          description: Document title.
+        snippet:
+          type: string
+          description: Relevant text excerpt matching the query.
+        document_type:
+          type: string
+          description: Type of legal document.
+        jurisdiction:
+          type: string
+        date:
+          type: string
+          format: date
+        relevance_score:
+          type: number
+          format: float
+        url:
+          type: string
+          format: uri
   responses:
-    Unauthorized:
-      description: Invalid or missing subscription key
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
+    Unauthorized:
+      description: Invalid or missing subscription key
       content:
         application/json:
           schema:
