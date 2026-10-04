@@ -69,6 +69,32 @@ components:
           type: integer
         query_time_ms:
           type: integer
+    SearchResult:
+      type: object
+      properties:
+        document_id:
+          type: string
+          description: vLex document identifier.
+        title:
+          type: string
+          description: Document title.
+        snippet:
+          type: string
+          description: Relevant text excerpt matching the query.
+        document_type:
+          type: string
+          description: Type of legal document.
+        jurisdiction:
+          type: string
+        date:
+          type: string
+          format: date
+        relevance_score:
+          type: number
+          format: float
+        url:
+          type: string
+          format: uri
     Error:
       type: object
       properties:
@@ -118,41 +144,15 @@ components:
           type: integer
           default: 10
           maximum: 50
-    SearchResult:
-      type: object
-      properties:
-        document_id:
-          type: string
-          description: vLex document identifier.
-        title:
-          type: string
-          description: Document title.
-        snippet:
-          type: string
-          description: Relevant text excerpt matching the query.
-        document_type:
-          type: string
-          description: Type of legal document.
-        jurisdiction:
-          type: string
-        date:
-          type: string
-          format: date
-        relevance_score:
-          type: number
-          format: float
-        url:
-          type: string
-          format: uri
   responses:
-    BadRequest:
-      description: Invalid request
+    Unauthorized:
+      description: Invalid or missing subscription key
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid or missing subscription key
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:

@@ -68,21 +68,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
+    KeyPhrase:
       type: object
       properties:
-        error:
+        phrase:
           type: string
-        message:
-          type: string
-    KeyPhrasesResponse:
-      type: object
-      properties:
-        key_phrases:
-          type: array
-          items:
-            $ref: '#/components/schemas/KeyPhrase'
-        processing_time_ms:
+        score:
+          type: number
+          format: float
+        occurrences:
           type: integer
     Classification:
       type: object
@@ -94,16 +88,35 @@ components:
           format: float
           minimum: 0
           maximum: 1
-    KeyPhrase:
+    KeyPhrasesResponse:
       type: object
       properties:
-        phrase:
-          type: string
-        score:
-          type: number
-          format: float
-        occurrences:
+        key_phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyPhrase'
+        processing_time_ms:
           type: integer
+    ClassifyRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Legal text to classify.
+          minLength: 50
+          maxLength: 100000
+        language:
+          type: string
+          default: en
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     ClassifyResponse:
       type: object
       properties:
@@ -119,19 +132,6 @@ components:
           items:
             type: string
           description: Key legal concepts identified.
-    ClassifyRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: Legal text to classify.
-          minLength: 50
-          maxLength: 100000
-        language:
-          type: string
-          default: en
     KeyPhrasesRequest:
       type: object
       required:

@@ -79,27 +79,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-        code:
-          type: integer
-    ExtractEntitiesResponse:
-      type: object
-      description: Extracted entities from the input text.
-      properties:
-        entities:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entity'
-        entity_count:
-          type: integer
-        processing_time_ms:
-          type: integer
     AnonymizeRequest:
       type: object
       required:
@@ -159,25 +138,18 @@ components:
         processing_time_ms:
           type: integer
           description: Processing time in milliseconds.
-    ExtractEntitiesRequest:
+    ExtractEntitiesResponse:
       type: object
-      required:
-      - text
-      description: Request body for entity extraction.
+      description: Extracted entities from the input text.
       properties:
-        text:
-          type: string
-          description: Input text to analyze.
-          minLength: 1
-          maxLength: 50000
-        entity_types:
+        entities:
           type: array
           items:
-            type: string
-          description: Entity types to extract.
-        language:
-          type: string
-          default: en
+            $ref: '#/components/schemas/Entity'
+        entity_count:
+          type: integer
+        processing_time_ms:
+          type: integer
     Entity:
       type: object
       description: A named entity identified in the input text.
@@ -211,7 +183,41 @@ components:
         end_offset:
           type: integer
           description: Character offset where the entity ends.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        code:
+          type: integer
+    ExtractEntitiesRequest:
+      type: object
+      required:
+      - text
+      description: Request body for entity extraction.
+      properties:
+        text:
+          type: string
+          description: Input text to analyze.
+          minLength: 1
+          maxLength: 50000
+        entity_types:
+          type: array
+          items:
+            type: string
+          description: Entity types to extract.
+        language:
+          type: string
+          default: en
   responses:
+    Unauthorized:
+      description: Invalid or missing subscription key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     RateLimited:
       description: Rate limit exceeded
       content:
@@ -220,12 +226,6 @@ components:
             $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid or missing subscription key
       content:
         application/json:
           schema:

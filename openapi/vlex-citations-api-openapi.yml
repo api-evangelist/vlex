@@ -42,24 +42,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-    CitationRequest:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: Legal text containing citations to detect.
-        jurisdiction:
-          type: string
-          description: Primary jurisdiction for citation parsing (helps with ambiguous formats).
     Citation:
       type: object
       description: A detected legal citation.
@@ -86,6 +68,24 @@ components:
           type: string
           format: uri
           description: Link to the cited document on vlex.com.
+    CitationRequest:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: Legal text containing citations to detect.
+        jurisdiction:
+          type: string
+          description: Primary jurisdiction for citation parsing (helps with ambiguous formats).
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     CitationResponse:
       type: object
       properties:
