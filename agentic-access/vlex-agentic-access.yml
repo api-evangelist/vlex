@@ -1,17 +1,18 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/vlex-iceberg-anonymization-openapi.yml, openapi/vlex-iceberg-legal-research-openapi.yml
+source: openapi/vlex-anonymization-api-openapi.yml, openapi/vlex-citations-api-openapi.yml,
+  openapi/vlex-classification-api-openapi.yml, openapi/vlex-documents-api-openapi.yml, openapi/vlex-search-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 7
   by_action_class:
-    acting: 6
-    connected: 1
+    acting: 5
+    connected: 2
   by_consequence:
-    write: 6
-    read: 1
+    write: 5
+    read: 2
   human_in_the_loop_required: 0
 operations:
 - path: /v1/anonymize
@@ -46,9 +47,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/search
+- path: /v1/citations
   method: post
-  operationId: searchDocuments
+  operationId: detectCitations
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -62,16 +63,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/documents/{document_id}
-  method: get
-  operationId: getDocument
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /v1/classify
   method: post
   operationId: classifyDocument
@@ -104,19 +95,23 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/citations
-  method: post
-  operationId: detectCitations
+- path: /v1/documents/{document_id}
+  method: get
+  operationId: getDocument
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
+- path: /v1/search
+  method: post
+  operationId: searchDocuments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
