@@ -1,4 +1,4 @@
-# vLex (vlex)
+# vLex
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,111 +66,165 @@
 
 vLex (part of Clio) is a global legal intelligence platform that applies AI to ingest, enrich, classify, and deliver insights from over 100 million legal documents across 2,000+ multilingual sources. The vLex Iceberg platform provides REST APIs for legal document anonymization, classification, key phrase extraction, citation detection, and AI-powered legal research. vLex also offers the Fastcase Legal Data API for raw legal data feeds.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Classification · Legal Research · Legal Tech · Natural Language Processing · Privacy
 
-## Scope
+## vLex on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for vLex is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/vlex/](https://apis.io/providers/vlex/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- AI
-- Classification
-- Legal Research
-- Legal Tech
-- Natural Language Processing
-- Privacy
+- [vLex Remote Authentication API](https://apis.io/apis/vlex/remote-auth-api/) — Single sign-on authentication API for corporate vLex accounts. Generates redirect URLs using HMAC authentication for seamless user access to vLex.com from…
+- [vLex Anonymization API](https://apis.io/apis/vlex/vlex-anonymization-api/) — Identify and anonymize personally identifiable information in text
+- [vLex Citations API](https://apis.io/apis/vlex/vlex-citations-api/) — Detect and resolve legal citations (vCite)
+- [vLex Classification API](https://apis.io/apis/vlex/vlex-classification-api/) — Classify legal documents and extract key phrases
+- [vLex Documents API](https://apis.io/apis/vlex/vlex-documents-api/) — Retrieve individual legal documents
+- [vLex Search API](https://apis.io/apis/vlex/vlex-search-api/) — Search the vLex legal document corpus
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-03-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### vLex Iceberg Anonymization API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Identifies and anonymizes names and personally identifiable information from any text input. Pre-trained on legal data to recognize names, organizations, and sensitive entities within legal documents for privacy protection and data compliance.
+- [Vlex Agentic Access](https://apis.io/agentic-access/vlex/vlex-agentic-access/)
 
-- **Human URL:** [https://developer.vlex.com/apis](https://developer.vlex.com/apis)
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- Anonymization
-- NLP
-- Privacy
-- Legal Tech
+- [vLex Legal Document](https://apis.io/schemas/vlex/vlex-legal-document/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://developer.vlex.com/apis)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/openapi/vlex-iceberg-anonymization-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/vlex-iceberg-anonymization.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vlex-iceberg-anonymization.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/vlex-iceberg-legal-research.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vlex-iceberg-legal-research.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### vLex Iceberg Legal Research API
+- [Vlex Legal Document Structure](https://apis.io/json-structure/vlex/vlex-legal-document-structure/)
 
-AI-powered legal research API providing document search, classification, key phrase extraction, citation detection (vCite), and legal entity identification across vLex's corpus of 100+ million legal documents from global jurisdictions.
+#### JSON-LD (1)
 
-- **Human URL:** [https://developer.vlex.com/apis](https://developer.vlex.com/apis)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Vlex Context](https://apis.io/jsonld/vlex/vlex-context/)
 
-- AI
-- Case Law
-- Citation Detection
-- Classification
-- Legal Research
-- Legal Tech
-- Search
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://developer.vlex.com/apis)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/vlex/refs/heads/main/openapi/vlex-iceberg-legal-research-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/vlex-iceberg-anonymization.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vlex-iceberg-anonymization.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/vlex-iceberg-legal-research.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vlex-iceberg-legal-research.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [vLex Vocabulary](https://apis.io/vocabularies/vlex/vlex-vocabulary/)
 
-### vLex Remote Authentication API
+#### Examples (1)
 
-Single sign-on authentication API for corporate vLex accounts. Generates redirect URLs using HMAC authentication for seamless user access to vLex.com from institutional portals.
+Example requests and responses.
 
-- **Human URL:** [https://github.com/vlex/remote_auth](https://github.com/vlex/remote_auth)
+- [Vlex Iceberg Anonymization Anonymize Text Example](https://apis.io/examples/vlex/vlex-iceberg-anonymization-anonymize-text-example/)
 
-#### Tags
+#### Collections (7)
 
-- Authentication
-- Single Sign-On
-- SSO
+Postman and Open Collection request collections.
 
-#### Properties
+- [vLex Iceberg Anonymization API](https://apis.io/collections/vlex/open-vlex-anonymization-api/)
+- [vLex Iceberg Anonymization Citations API](https://apis.io/collections/vlex/open-vlex-citations-api/)
+- [vLex Iceberg Anonymization Classification API](https://apis.io/collections/vlex/open-vlex-classification-api/)
+- [vLex Iceberg Anonymization Documents API](https://apis.io/collections/vlex/open-vlex-documents-api/)
+- [vLex Iceberg Anonymization API](https://apis.io/collections/vlex/open-vlex-iceberg-anonymization/)
+- [vLex Iceberg Legal Research API](https://apis.io/collections/vlex/open-vlex-iceberg-legal-research/)
+- [vLex Iceberg Anonymization Search API](https://apis.io/collections/vlex/open-vlex-search-api/)
 
-- [GitHub Repository](https://github.com/vlex/remote_auth)
-- [Postman Collection](collections/vlex-iceberg-anonymization.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vlex-iceberg-anonymization.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/vlex-iceberg-legal-research.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vlex-iceberg-legal-research.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-## Common Properties
+Spectral rulesets for the provider's contracts.
 
-- [LinkedIn](https://www.linkedin.com/company/vlex)
+- [vLex — jsonschema rules](https://apis.io/rules/vlex/vlex-jsonschema-spectral-rules/)
+- [vLex API Rules](https://apis.io/rules/vlex/vlex-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Vlex Authentication](https://apis.io/security/vlex/vlex-authentication/)
+- [Vlex Domain Security](https://apis.io/security/vlex/vlex-domain-security/)
+- [Vlex Trust Center](https://apis.io/security/vlex/vlex-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Vlex Plans Pricing](https://apis.io/plans/vlex/vlex-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Vlex Rate Limits](https://apis.io/rate-limits/vlex/vlex-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Vlex Finops](https://apis.io/finops/vlex/vlex-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://vlex.com/)
-- [Developer  Portal](https://developer.vlex.com/)
-- [Reference](https://developer.vlex.com/apis)
 - [Documentation](https://vlex.com/iceberg-ai)
-- [Use  Cases](https://developer.vlex.com/use-cases)
-- [Integrations](https://vlex.com/integrations)
-- [GitHub Organization](https://github.com/vlex)
-- [Product](https://vlex.com/products/fastcase)
 - [Support](https://support.vlex.com/)
+- [Blog](https://vlex.com/news)
+- [GitHub](https://github.com/vlex)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 35.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 60.4 |
+| Contract governance | 13.6 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 45.2 |
+| Access clarity | 13.2 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.0** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/vlex/](https://apis.io/providers/vlex/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for vLex: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/vlex/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
